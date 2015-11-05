@@ -8,12 +8,11 @@
 2. Xcode and command line tools (gcc -v to conform)
 3. Homebrew
 4. Ruby virtual environment (rbenv)
-step2: 4. RubyGems - to update ruby `gem update --system`. to install a gem `gem install ####`. to list gems `gem list`
 5. Ruby
-step3: 6. Ruby on Rails - first install `gem install bundler` then rehash, then `gem install rails --no-ri --no-rdoc` and then rehash it
-step4: 7. MySQL - use `brew install mysql`, then copy the launch at thing, and launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist and then adde root password by doing `mysqladmin -u root password`. now install rails mysql ruby gem `gem install mysql2`
-8. Web server
-
+6. RubyGems
+7. Ruby on Rails
+8. MySQL
+9. Web server
 
 ## 2 Instillation
 
@@ -50,7 +49,7 @@ Open terminal and type `brew update` to update the list of available software. T
 OSX comes preinstalled Ruby 2. To check what version you are using type `ruby -v` in terminal. But we would be using virtual environment to install the latest version of Ruby and Rails. Do the following:
 
 1. Goto [Ruby download page](https://www.ruby-lang.org/en/downloads/) and check the current stable Ruby version number. At the time of this tutorial the stable version was `2.2.3`. Now, to install ruby in a virtual environment type `rbenv install 2.2.3` in your terminal.
-2. Once Ruby is installed you would have to rehash the veirtual environment by typing `rbenv rehash` in the terminal.
+2. Once Ruby is installed you would have to rehash the virtual environment by typing `rbenv rehash` in the terminal.
 3. Then we have to make the current virtual environment to be used globally. To do that type `rbenv global 2.2.3`.
 
 > Always rehash the Ruby virtual environment by typing `rbenv rehash` in your terminal.
@@ -59,7 +58,7 @@ You can list out all available versions of Ruby by typing `rbenv list` in the te
 
 ### 2.6 Step 6: RubyGems
 
-Ruby comes preinstalled with RubyGems. But it is recommeded that you update RubyGems by typing `gem update --system` in the terminal. To list all the installed gems type `gem list` in the terminal. To install a gem type in `gem install gem_name`, likewise to uninstall a gem type `gem uninstall gem_name` in the terminal.
+Ruby comes preinstalled with RubyGems. But it is recommended that you update RubyGems by typing `gem update --system` in the terminal. To list all the installed gems type `gem list` in the terminal. To install a gem type in `gem install gem_name`, likewise to uninstall a gem type `gem uninstall gem_name` in the terminal.
 
 ### 2.7 Step 7: Installing Ruby on Rails
 
