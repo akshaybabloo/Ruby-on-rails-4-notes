@@ -105,7 +105,11 @@ Open terminal change the directory the application folder and type `rails server
 
 ### 3.4 Generating views and controller
 
-To generate files for Rails project type `rails generate` in the terminal; this will list out all the possible file that Rails can generate for you. To generate a controller and view, type `rails generate controller`, this will list out all the possible files this command can do, but type `rails generate controller controller_name view_name`; i.e `rails generate controller demo index`. This will create files under app folder. You might also want to edit `routes.rb` by typing in `get demo/index`. To access this link you would have to goto `http://localhost:3000/demo/index`
+To generate files for Rails project type `rails generate` in the terminal; this will list out all the possible file that Rails can generate for you. To generate a controller and view, type `rails generate controller`, this will list out all the possible files this command can do, but type `rails generate controller controller_name view_name`; i.e `rails generate controller demo index`. This will create files under app folder. You might also want to edit `routes.rb` by typing in `get demo/index`.
+
+At this point we have to edit one file which is under `app/controller/demo_controller.rb`. In this file you would have to type `layout false`, I will explain about this later.
+
+To access this link you would have to goto `http://localhost:3000/demo/index`.
 
 ### 3.5 File structure
 
@@ -114,7 +118,7 @@ Below is the complete list of file that are generated when you create a project.
 <pre>
 simple_crm
 |
-+-- app
++-- app -> Application code
 |   |
 |   +-- assets
 |   |   |
@@ -132,11 +136,11 @@ simple_crm
 |   +-- controllers
 |   |   |
 |   |   +-- application_controller.rb
-|   |   +-- concerns
+|   |   +-- concerns -> common code folder for their specific use
 |   |   |   |
 |   |   |   `-- .keep
 |   |   `-- demo_controller.rb
-|   +-- helpers
+|   +-- helpers -> helper code for view
 |   |   |
 |   |   +-- application_helper.rb
 |   |   `-- demo_helper.rb
@@ -157,14 +161,14 @@ simple_crm
 |       `-- layouts
 |           |
 |           `--application.html.erb
-+-- bin
++-- bin -> command line files
 |   |
 |   +-- bundle
 |   +-- rails
 |   +-- rake
 |   +-- setup
 |   `-- spring
-+-- config
++-- config -> all configuration files
 |   |
 |   +-- application.rb
 |   +-- boot.rb
@@ -172,10 +176,10 @@ simple_crm
 |   +-- environment.rb
 |   +-- environments
 |   |   |
-|   |   +-- development.rb
-|   |   +-- production.rb
-|   |   `-- test.rb
-|   +-- initializers
+|   |   +-- development.rb -> development build of rails
+|   |   +-- production.rb -> when launching rails to go live
+|   |   `-- test.rb -> for testing rails
+|   +-- initializers -> this folder is assessed when the app launches
 |   |   |
 |   |   +-- assets.rb
 |   |   +-- backtrace_silencers.rb
@@ -185,13 +189,13 @@ simple_crm
 |   |   +-- mime_types.rb
 |   |   +-- session_store.rb
 |   |   `-- wrap_parameters.rb
-|   +-- locales
+|   +-- locales -> internationalization
 |   |   |
 |   |   `-- en.yml
-|   +-- routes.rb
+|   +-- routes.rb -> routing to pages and controller
 |   `-- secrets.yml
 +-- config.ru
-+-- db
++-- db -> database code folder
 |   |
 |   `-- seeds.rb
 +-- Gemfile
@@ -208,7 +212,7 @@ simple_crm
 |   |
 |   +-- .keep
 |   `-- development.log
-+-- public
++-- public -> this folder will be public
 |   |
 |   +-- 404.html
 |   +-- 422.html
@@ -219,7 +223,7 @@ simple_crm
 +-- README.rdoc
 +-- test
 +-- temp
-`-- vendor
+`-- vendor -> 3rd party code place
     |
     `-- assets
         |
@@ -230,3 +234,66 @@ simple_crm
             |
             `-- .keep
 </pre>
+
+### 3.6 Handling server requests
+
+Rails architecture is some what like an MVC architecture but a bit more robust. When an request is made for an html page rails first searches in the `public` folder, if a file is found it would never touch the Rails framework and returns the page. If there are not request found in the `public` folder then the process advances to rails framework.
+
+For example I have an html file i.e. `test.html` placed in the public folder. To access this file all you have to do it run the server and the file name with or without the file extension i.e. `localhost:3000/test` or `localhost:3000/test.html`.
+
+This can be tested by doing the following:
+
+1. Create a folder named `demo` under `public` folder.
+2. In the `demo` folder create an `index.html` page.
+
+Now run the server (you don't have to restart the server if it's already running) and type `localhost:3000/demo/index.html` or `localhost:3000/demo/index` in your web browser. If you remember this URL looks like the the controller we created [here](#34-generating-views-and-controller), when you submit the URL `public` folder is accessed first not the rails framework.
+
+### 3.7 Routing
+
+When a file is not found in the `public` folder, the request is sent to `routes.rb` which determines which `controller` and `view` should be accessed.
+
+Routes are processed as top to bottom.
+
+There are different types of routes, three of those are as follows:
+
+1. Simple rout (Match rout)
+2. Default rout
+3. Root rout
+
+#### 3.7.1 Simple rout (Match rout)
+
+This is a simplest form of routing in Rails. When you run the server and open an link for example `localhost:3000/demo/index`, Rails performs a get request. This get request can be seen in `routes.rb` i.e. `get 'demo/index'`. This small code is a shortcut code for `match` which can be written as
+
+```
+match 'demo/index',
+  :to => 'demo#index',
+  :via => :get
+```
+
+Hence the name Match rout
+
+#### 3.7.2 Default route
+
+Simple rout is not flexible, that means for every file we would have to create a static url. Default rout can have certain rules to do all this automatically.
+
+Default rout follows `:controller/:action/:id` structure. For example `GET /student/edit/23` which means `student_controller`, `edit action` @ id `23`. So this can be written as the following:
+
+```
+match `:controller(/:action(/:id))`,
+  :via => :get
+```
+
+`controller`, `action` and `id` are the keywords for Rails and `()` are there because each keyword can be optional. See [routes.db](#link-me)
+
+You can also add the format which can be written as
+
+```
+match `:controller(/:action(/:id(.:format)))`,
+  :via => :get
+```
+
+#### 3.7.3 Root rout
+
+If a GET request is made and there are no match found then Rails should redirect to a default place called as `root`. The code for this can be written as `root :to => 'demo#index'` or `root 'demo#index'`
+
+## 4 Controller, views and dynamic content
