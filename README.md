@@ -282,7 +282,7 @@ Default rout follows `:controller/:action/:id` structure. For example `GET /stud
 match `:controller(/:action(/:id))`, :via => :get
 ```
 
-`controller`, `action` and `id` are the keywords for Rails and `()` are there because each keyword can be optional. See [routes.db](#link-me)
+`controller`, `action` and `id` are the keywords for Rails and `()` are there because each keyword can be optional. See [routes.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb)
 
 You can also add the format which can be written as
 
