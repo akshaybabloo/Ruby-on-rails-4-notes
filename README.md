@@ -320,4 +320,31 @@ end
 You can also tell an action to load a template by using `render()` method. For example you can to render `demo/hello` you can write `render(:template => 'demo/hello')` or `render('demo/hello')` or `render('hello')` if it's in the same template.
 
 `render` method is usually used in a `if..else` statements. For example if a user logs in successfully `render('welcome_page')` else `render('login_page')`.
- 
+
+### 4.2 Redirect action
+
+You can redirect a request to different controller or action. This is based on `HTTP Redirect` (please see HTTP/1.1 302).
+
+You can redirect to different controller or action by using `redirect_to()` method. For example:
+
+```
+def other_hello
+    redirect_to(:controller => 'demo', :action => 'index')
+end
+```
+
+To open this you would have to goto `localhost:3000/demo/other_hello` this will immediately redirect you to `index`. You can see this by looking at the logs in the terminal, which will look like this:
+
+```
+# this is the first request
+Started GET "/demo/other_hello" for ::1 at 2015-11-08 13:30:39 +1300
+Processing by DemoController#other_hello as HTML
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+# then the request is redirect to this
+Started GET "/" for ::1 at 2015-11-08 13:30:39 +1300
+Processing by DemoController#index as HTML
+  Rendered demo/hello.html.erb (0.1ms)
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.0ms)
+```

@@ -8,4 +8,12 @@ class DemoController < ApplicationController
 
   def hello # this renders `hello.html.erb`
   end
+
+  def other_hello
+    redirect_to(:controller => 'demo', :action => 'index')
+  end
+
+  def google
+    redirect_to('http://www.google.com')
+  end
 end
