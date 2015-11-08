@@ -369,3 +369,25 @@ You can embed a code in `erb` template with the following syntax:
 For example open `hello.html.erb` template and do the following
 
 * Type in `<%= 1+1 %>`
+
+### 4.4 Instance variable
+
+Instance variables helps in accessing data gathered by the controller and present it to view (template). Ruby is an object oriented programming language, so every class has an instance variable which can be used across the class. If you open `demo_controller.rb` from `app/controller/` you can see that `DemoController` is a subclass (`<`) of `ApplicationController`, that means it's a class which can have instances.
+
+To use instance we have to use `@` sign before a variable. For example `@instance` (a variable can be anything).
+
+To access a variable in template, we would have to put an instance in a function. For example:
+
+```
+def hello
+  @array = [1,2,3,4]
+end
+```
+
+To use this instance variable in the template just call it by the instance name:
+
+```
+<% @array.each do |n| %>
+  <%= n %><br>
+<% end %>
+```

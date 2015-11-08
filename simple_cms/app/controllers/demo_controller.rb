@@ -7,6 +7,7 @@ class DemoController < ApplicationController
   end
 
   def hello # this renders `hello.html.erb`
+    @array = [1,2,3,4,5,6]
   end
 
   def other_hello
