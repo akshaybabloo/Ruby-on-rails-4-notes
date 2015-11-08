@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   #       :to => 'demo#index',
   #       :via => :get
 
-  match `:controller(/:action(/:id))`, # this is know an default route
-        :via => :get
+  match ':controller(/:action(/:id))' , :via => :get # this is called default rout
 
 
   # The priority is based upon order of creation: first created -> highest priority.

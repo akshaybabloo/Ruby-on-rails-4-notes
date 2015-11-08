@@ -279,8 +279,7 @@ Simple rout is not flexible, that means for every file we would have to create a
 Default rout follows `:controller/:action/:id` structure. For example `GET /student/edit/23` which means `student_controller`, `edit action` @ id `23`. So this can be written as the following:
 
 ```
-match `:controller(/:action(/:id))`,
-  :via => :get
+match `:controller(/:action(/:id))`, :via => :get
 ```
 
 `controller`, `action` and `id` are the keywords for Rails and `()` are there because each keyword can be optional. See [routes.db](#link-me)
@@ -288,8 +287,7 @@ match `:controller(/:action(/:id))`,
 You can also add the format which can be written as
 
 ```
-match `:controller(/:action(/:id(.:format)))`,
-  :via => :get
+match `:controller(/:action(/:id(.:format)))`, :via => :get
 ```
 
 #### 3.7.3 Root rout
@@ -297,3 +295,29 @@ match `:controller(/:action(/:id(.:format)))`,
 If a GET request is made and there are no match found then Rails should redirect to a default place called as `root`. The code for this can be written as `root :to => 'demo#index'` or `root 'demo#index'`
 
 ## 4 Controller, views and dynamic content
+
+In this chapter we will look into more detailed approach on MVC architecture.
+
+### 4.1 Template rendering
+
+Here we will see hoe the controller chooses which view template to render and return back.
+
+Do the following:
+
+1. Create `hello.html.erb` in `app/view/demo/`
+2. Edit the html file
+3. Run the server
+
+You can access the new html file by typing `localhost:3000/demo/hello`. You are able to do this without editing `routes.rb` because we added `match `:controller(/:action(/:id))`, :via => :get` to it. If this was not there then you would have to manually add an extra GET code `get 'demo/hello'`
+
+Now, if you open `demo_controller.rb` from `app/controllers/` we can see that there is not action specified for the new `hello` template, this is not a problem Rails uses its default template system to render the output. But it is best practice to always define a action function for a temple. so we write the following code in there
+
+```
+def hello
+end
+```
+
+You can also tell an action to load a template by using `render()` method. For example you can to render `demo/hello` you can write `render(:template => 'demo/hello')` or `render('demo/hello')` or `render('hello')` if it's in the same template.
+
+`render` method is usually used in a `if..else` statements. For example if a user logs in successfully `render('welcome_page')` else `render('login_page')`.
+ 
