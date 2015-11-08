@@ -356,3 +356,16 @@ def google
  redirect_to('http://www.google.com')
 end
 ```
+
+### 4.3 View template
+
+Till now you have only seen how a web renders an HTML page which is not dynamic. You can put ruby code inside of HTML pages to make them dynamic. To do this we use ERB (Embedded Ruby), it is an eRuby template system. For example we have file in the `view` folder called `index.html.erb`, which means it has a template name as `index`, process it as `ERB` and give an output as `html`
+
+You can embed a code in `erb` template with the following syntax:
+
+* `<% code %>` - this will only execute the ruby code
+* A variation of the above code is `<%= code %>` - this will execute the ruby code and outputs it
+
+For example open `hello.html.erb` template and do the following
+
+* Type in `<%= 1+1 %>`
