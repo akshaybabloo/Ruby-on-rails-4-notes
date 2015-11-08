@@ -348,3 +348,11 @@ Processing by DemoController#index as HTML
   Rendered demo/hello.html.erb (0.1ms)
 Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.0ms)
 ```
+
+You can redirect it to any URL by defining an new action. For example
+
+```
+def google
+ redirect_to('http://www.google.com')
+end
+```
