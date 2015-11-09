@@ -466,3 +466,7 @@ Then you can test the database by typing `rake bd:schema:dump`. This should not 
 It's a simple ruby program which helps us to run tasks. It is something similar to `make` command in unix. It uses `RakeFile` which is available in the root folder of the project. You can list out all the tasks available for Rake to use by typing `rake -T`. You can see that there are `db` tasks which will be used a lot in this chapter.
 
 Rake can also take in variable names. Most often used is `rake db:schema:dump RAILS_ENV=production`. By default Rails uses development environment, to change the environment you would have to use this command.
+
+### 5.5 Rails migration
+
+Migrate means to change the state of a database which means that you can create a new table, add row or column to an existing table.
