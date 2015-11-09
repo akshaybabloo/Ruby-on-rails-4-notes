@@ -417,8 +417,40 @@ In ruby we have an object called `inspect`, which will outline the output. An ex
 
 ## 5 Database and migrations
 
-Databases are the core concepts you have to learn before creating an CRM. Here you will learn how to use and implement database and migrate them.
+Databases are the core concepts you have to learn before creating an CMS. Here you will learn how to use and implement database and migrate them.
 
 ### 5.1 Database introduction
 
 Usually Rails takes care of database structure, but some concepts of databases are important to know. I would suggest get a basic knowledge of databases which are available on the internet. Databases use `CRUD` concepts which means `C - create, R - Read, U - Update and D- Delete`. I will be discussing about them as I go along.
+
+### 5.2 Creating a database
+
+Rails provide ways to create databases but I suggest using command line to create a database.
+
+There are  four important keywords that you would need to know to create, use and delete a database, and they are:
+
+1. `SHOW DATABASES;` - Show all the databases available.
+2. `CREATE DATABASE database_name;` - Creating a new database.
+3. `USE database_name;` - Use the database to add tables.
+4. `DROP DATABASE database_name;` - Delete a database.
+
+Lets create a database:
+
+* If you have created a password for your mysql login, you would have to enter `mysql -u root -p` which will ask you for your root password for mysql login.
+* You can show databases available by entering `SHOW DATABASES;`. This will list out all default installed databases.
+*  To create a data base type `CREATE DATABASE simple_cms_development;`. This will reply with `Query OK, 1 row affected (0.03 sec)` which means that a database has been created. You can conform this by typing `SHOW DATABASE;`
+* It is not a good idea to give Rails all the permissions of `root`, it is better to create a username for the Rails to use the database and give the permissions to use the database just created. To do that the syntax for that is
+```
+GRANT ALL PRIVILEGES ON database_name.*
+TO 'username'@'localhost'
+IDENTIFIED BY 'password';
+```
+So to create and grant permissions do the following
+```
+GRANT ALL PRIVILEGES ON simple_cms_development.*
+TO 'simple_cms'@'localhost'
+IDENTIFIED BY 'akshay12';
+```
+Which will show you an output as `Query OK, 0 rows affected (0.05 sec)`, that means the username and permissions has been granted.
+* You can show all the granted databases for a user by typing `SHOW GRANT FOR 'username'@'localhost';`.
+* You can exit root mysql with `exit` command and login as `simple_cms` by typing `mysql -u simple_cms -p simple_cms_development`. This means login with the username provide and use simple_cms_development database.
