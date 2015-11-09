@@ -414,3 +414,11 @@ When an URL consists of string after `?` those are called parameters. For exampl
 `:id` is put to the left side of the URL, this can be seen in [routs.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb). Rails uses Parameter hashing method called `params` which uses `HashWithIndifferentAccess`, that means that you can have an key-value pair as `params['id']` or `params[:id]` and you can call these as `params['id']`, `params[:id]` or `@id`. See hello.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/hello.html.erb) for the examples.
 
 In ruby we have an object called `inspect`, which will outline the output. An example of this is shown in my Ruby tutorial for [hash](https://github.com/akshaybabloo/Ruby-notes/blob/master/src/ObjectTypes_2/hashes_2_6.rb#L5); To use this in Rails you can add `<%= params.inspect %>` which can make troubleshooting easy.
+
+## 5 Database and migrations
+
+Databases are the core concepts you have to learn before creating an CRM. Here you will learn how to use and implement database and migrate them.
+
+### 5.1 Database introduction
+
+Usually Rails takes care of database structure, but some concepts of databases are important to know. I would suggest get a basic knowledge of databases which are available on the internet. Databases use `CRUD` concepts which means `C - create, R - Read, U - Update and D- Delete`. I will be discussing about them as I go along.
