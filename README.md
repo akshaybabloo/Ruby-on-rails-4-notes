@@ -454,3 +454,9 @@ IDENTIFIED BY 'akshay12';
 Which will show you an output as `Query OK, 0 rows affected (0.05 sec)`, that means the username and permissions has been granted.
 * You can show all the granted databases for a user by typing `SHOW GRANT FOR 'username'@'localhost';`.
 * You can exit root mysql with `exit` command and login as `simple_cms` by typing `mysql -u simple_cms -p simple_cms_development`. This means login with the username provide and use simple_cms_development database.
+
+### 5.3 Configuring Rails to use the username and database
+
+The data base file will be under `config/database.yml`, open this file. You would have to edit the `default`, which can be seen in [database.yml](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/database.yml).
+
+Then you can test the database by typing `rake bd:schema:dump`. This should not return any error that means the databases is accessible by Rails. This will also create a file called `schema.rb` under `db/` folder.
