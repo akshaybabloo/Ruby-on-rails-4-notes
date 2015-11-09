@@ -392,7 +392,7 @@ To use this instance variable in the template just call it by the instance name:
 <% end %>
 ```
 
-### Hyperlinks
+### 4.5 Hyperlinks
 
 Instead of using `href` to link to another page Rails uses much powerful method to link html files.
 
@@ -406,3 +406,11 @@ Target can be any two of the following:
 This syntax generates an html `href` tag which links to the action provided. This example can be seen in [hello.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/hello.html.erb) but if you see this in [index.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/index.html.erb) when you hover on the second link you will see that there is no full url like `localhost:3000/demo/index` this is because we have added `root demo#index` in the [routs.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb) file which will reduce the link to `localhost:3000/`
 
 > Note: This shows that not only does `routs.rb` show how the pages are routed but it also plays an important role in how the links are created.
+
+### 4.6 URL parameters
+
+When an URL consists of string after `?` those are called parameters. For example `localhost:3000/demo/index/1?name=akshay&age=25`, these parameters helps in sending data to the server (ROR) which can process the data. Parameters are key-value pairs.
+
+`:id` is put to the left side of the URL, this can be seen in [routs.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb). Rails uses Parameter hashing method called `params` which uses `HashWithIndifferentAccess`, that means that you can have an key-value pair as `params['id']` or `params[:id]` and you can call these as `params['id']`, `params[:id]` or `@id`. See hello.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/hello.html.erb) for the examples.
+
+In ruby we have an object called `inspect`, which will outline the output. An example of this is shown in my Ruby tutorial for [hash](https://github.com/akshaybabloo/Ruby-notes/blob/master/src/ObjectTypes_2/hashes_2_6.rb#L5); To use this in Rails you can add `<%= params.inspect %>` which can make troubleshooting easy.

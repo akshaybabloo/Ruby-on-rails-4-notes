@@ -8,6 +8,8 @@ class DemoController < ApplicationController
 
   def hello # this renders `hello.html.erb`
     @array = [1,2,3,4,5,6]
+    @id = params['id']
+    @page = params[:page]
   end
 
   def other_hello

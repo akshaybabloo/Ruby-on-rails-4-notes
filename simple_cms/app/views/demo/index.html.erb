@@ -2,4 +2,6 @@
 <p>This is an index page!</p>
 
 <a href="/demo/hello">link to hello 1</a> <br>
-<%= link_to('link to hello 2', {:action => 'hello'}) %>
+<%= link_to('link to hello 2', {:action => 'hello'}) %> <br>
+
+<%= link_to('hello with parameters', {:action => 'hello', :page => 5, :id => 20}) %>
