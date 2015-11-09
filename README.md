@@ -460,3 +460,9 @@ Which will show you an output as `Query OK, 0 rows affected (0.05 sec)`, that me
 The data base file will be under `config/database.yml`, open this file. You would have to edit the `default`, which can be seen in [database.yml](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/database.yml).
 
 Then you can test the database by typing `rake bd:schema:dump`. This should not return any error that means the databases is accessible by Rails. This will also create a file called `schema.rb` under `db/` folder.
+
+### 5.4 What is Rake?
+
+It's a simple ruby program which helps us to run tasks. It is something similar to `make` command in unix. It uses `RakeFile` which is available in the root folder of the project. You can list out all the tasks available for Rake to use by typing `rake -T`. You can see that there are `db` tasks which will be used a lot in this chapter.
+
+Rake can also take in variable names. Most often used is `rake db:schema:dump RAILS_ENV=production`. By default Rails uses development environment, to change the environment you would have to use this command.
