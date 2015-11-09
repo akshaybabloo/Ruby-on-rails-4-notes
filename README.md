@@ -391,3 +391,18 @@ To use this instance variable in the template just call it by the instance name:
   <%= n %><br>
 <% end %>
 ```
+
+### Hyperlinks
+
+Instead of using `href` to link to another page Rails uses much powerful method to link html files.
+
+The syntax is `<%= link_to(text, target)%>`
+
+Target can be any two of the following:
+
+* `'demo/index'` - if the you want to link it in the same controller.
+* `{:controller => 'demo', :action => 'index'}` - if you want to link it to a different controller.
+
+This syntax generates an html `href` tag which links to the action provided. This example can be seen in [hello.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/hello.html.erb) but if you see this in [index.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/index.html.erb) when you hover on the second link you will see that there is no full url like `localhost:3000/demo/index` this is because we have added `root demo#index` in the [routs.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb) file which will reduce the link to `localhost:3000/`
+
+> Note: This shows that not only does `routs.rb` show how the pages are routed but it also plays an important role in how the links are created.
