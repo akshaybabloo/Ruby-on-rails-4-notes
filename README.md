@@ -580,7 +580,7 @@ Running migrate command are as follows
 6. rake db:migrate:down VERSION=20151110041214
 7. rake db:migrate:redo VERSION=20151110041214
 
-5.8 Migration methods
+### 5.8 Migration methods
 
 There are different types of table migration methods, few of them are
 
