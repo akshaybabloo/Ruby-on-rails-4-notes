@@ -585,11 +585,11 @@ Running migrate command are as follows
 There are different types of table migration methods, few of them are
 
 1. To create a table
-```
-create_table(table, options) do |t|
-.....columns....
-end
-```
+    ```
+    create_table(table, options) do |t|
+    .....columns....
+    end
+    ```
 2. Drop table - `drop_table(table)`
 3. Rename table - `rename_table(table, ne_name)`
 
