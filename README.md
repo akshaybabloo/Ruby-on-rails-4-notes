@@ -513,3 +513,67 @@ And the options are:
 3. `:null => true/false` - If an column can be null or not
 4. `:precision => number` - for decimal columns
 5. `:scale => number` - for decimal columns
+
+5.7 Running migrations
+
+To migrate type `rake db:migrate` in the terminal and this is its output:
+```
+== 20151110041214 DoNothingYet: migrating =====================================
+== 20151110041214 DoNothingYet: migrated (0.0000s) ============================
+
+== 20151110042612 CreateUsers: migrating ======================================
+-- create_table(:users)
+   -> 0.0312s
+== 20151110042612 CreateUsers: migrated (0.0313s) =============================
+```
+
+This will create two tables, you can log into mysql by doing `mysql -u simple_cms -p simple_cms_development`. you can list out table by typing `SHOW TABLES`. Then you can list out the fields associate to each table by typing `SHOW FIELDS FROM users;` which will print
+```
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | int(11)      | NO   | PRI | NULL    | auto_increment | -> This is automatically added by Rails
+| first_name | varchar(25)  | YES  |     | NULL    |                |
+| last_name  | varchar(50)  | YES  |     | NULL    |                |
+| email      | varchar(255) | NO   |     |         |                |
+| password   | varchar(40)  | YES  |     | NULL    |                |
+| created_at | datetime     | NO   |     | NULL    |                | -> t.timestam created this
+| updated_at | datetime     | NO   |     | NULL    |                | -> and this
++------------+--------------+------+-----+---------+----------------+
+```
+
+All the migration versioning is located in `schema_migration` table which is located in the mysql.
+
+Migrations has also done one other thing, that is to write some entries in `/db/schema.rb`, when ever you run a schem rails dumps the schema to this file and this file also shows the current state of the database.
+
+To migrate down type in the following `rake db:migrate VERSION=0` which will output
+```
+== 20151110042612 CreateUsers: reverting ======================================
+-- drop_table(:users)
+   -> 0.0442s
+== 20151110042612 CreateUsers: reverted (0.0443s) =============================
+
+== 20151110041214 DoNothingYet: reverting =====================================
+== 20151110041214 DoNothingYet: reverted (0.0000s) ============================
+```
+
+You can ask for the status of migrated files by typing `rake db:migrate:status` the output to that is
+```
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+  down    20151110041214  Do nothing yet
+  down    20151110042612  Create users
+```
+You can also migrate to one table by typing `rake db:migrate VERSION=20151110041214`, this will only migrate `do nothing yet` table.
+
+Running migrate command are as follows
+
+1. rake db:migrate
+2. rake db:migrate VERSION=0
+3. rake db:migrate VERSION=20151110041214
+4. rake db:migrate:status
+5. rake db:migrate:up VERSION=20151110041214
+6. rake db:migrate:down VERSION=20151110041214
+7. rake db:migrate:redo VERSION=20151110041214
