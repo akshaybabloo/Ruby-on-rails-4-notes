@@ -1,5 +1,7 @@
 # Ruby on Rails 4 Notes
 
+> Note 1: Always type these commands in the Rails folder after you create a project.
+
 ## 1. Requirements
 
 ### 1.1 Mac
@@ -95,7 +97,7 @@ There are two file which are important to Bundler:
 
 Once you have configured what you want to, just type `bundle install` in the terminal and to list all bundles use `bundle list`.
 
-> Note: `rake db:migrate` and `bundle exec rake db:migrate`
+> Note 2: `rake db:migrate` and `bundle exec rake db:migrate`
 
 ### 3.3 Accessing a project
 
@@ -405,7 +407,7 @@ Target can be any two of the following:
 
 This syntax generates an html `href` tag which links to the action provided. This example can be seen in [hello.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/hello.html.erb) but if you see this in [index.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/index.html.erb) when you hover on the second link you will see that there is no full url like `localhost:3000/demo/index` this is because we have added `root demo#index` in the [routs.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb) file which will reduce the link to `localhost:3000/`
 
-> Note: This shows that not only does `routs.rb` show how the pages are routed but it also plays an important role in how the links are created.
+> Note 3: This shows that not only does `routs.rb` show how the pages are routed but it also plays an important role in how the links are created.
 
 ### 4.6 URL parameters
 
@@ -577,3 +579,39 @@ Running migrate command are as follows
 5. rake db:migrate:up VERSION=20151110041214
 6. rake db:migrate:down VERSION=20151110041214
 7. rake db:migrate:redo VERSION=20151110041214
+
+5.8 Migration methods
+
+There are different types of table migration methods, few of them are
+
+1. To create a table
+```
+create_table(table, options) do |t|
+.....columns....
+end
+```
+2. Drop table - `drop_table(table)`
+3. Rename table - `rename_table(table, ne_name)`
+
+Column migration methods:
+
+1. add_column(table, column, type, options)
+2. remove_column(table, column)
+3. rename_column(table, column, new_name)
+4. change_column(table, column, type, options)
+
+There are two migration methods for index:
+
+1. add_index(table, column,options)
+2. remove_index(table,column)
+
+Options for index migrations:
+
+1. `:unique => true/false`
+2. `:name => 'your_custom_name'`
+
+Execute migration method - `execute('any sql string')` - this executes any sql string give to it.
+
+Lets test it out:
+
+Type `rails generate migration AlterUsers`, see `/db/migrate/20151110061255_alter_users.rb`
