@@ -470,3 +470,46 @@ Rake can also take in variable names. Most often used is `rake db:schema:dump RA
 ### 5.5 Rails migration
 
 Migrate means to change the state of a database which means that you can create a new table, add row or column to an existing table.
+
+### 5.6 Generating migrations
+
+To generate migration type `rails generate migration DoNothingYet` in the terminal. This will create a folder called `migrate` under `db/`. There are two ways of doing migrations in Rails. One using `change` and the other is using `up` and `down`. See `db/migrate/0151110041214_do_nothing_yet.rb`.
+
+The other way to create migrations is to create a model. To do that type in `rails generate model User` on terminal, this will create few files for us. That will give you an output like this
+```
+invoke  active_record
+   create    db/migrate/20151110041214_do_nothing_yet.rb
+akshayrajgollahalli:simple_cms (master): rails generate model User
+   invoke  active_record
+   create    db/migrate/20151110042612_create_users.rb
+   create    app/models/user.rb
+   invoke    test_unit
+   create      test/models/user_test.rb
+   create      test/fixtures/users.yml
+```
+
+Open `db/migrate/20151110042612_create_users.rb` file, in which you will find a shortcut method which we will not look into as of now. So we will change this into `up` and `down` methods. There are two ways of creating table columns:
+
+1. A long version of it is `t.column 'name', :type, options` - example: `t.column 'first_name', :string`
+2. A shortcut method is `t.type 'name', options` - example: `t.string 'last_name'`
+
+There are 10 types of column types (generally used):
+
+1. binary
+2. boolean
+3. data
+4. datetime
+5. decimal
+6. float
+7. integer
+8. string
+9. text
+10. time
+
+And the options are:
+
+1. `:limit => size` - size of the field or how many chars the field should accept
+2. `:default => value` - default value to the column
+3. `:null => true/false` - If an column can be null or not
+4. `:precision => number` - for decimal columns
+5. `:scale => number` - for decimal columns
