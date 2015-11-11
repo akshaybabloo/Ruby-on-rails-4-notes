@@ -717,3 +717,9 @@ Remember we changed the table name `users` to `admin_users`, this can be seen in
 * Open `users.rb` and tell the rails that the name has been chage to something els eby typing `self.table_name = 'admin_users'`
 <p align="center"><b>OR</b></p>
 * You can rename the file - `users.rb` -> `admin_users.rb` and the class name - `Users` -> `AdminUsers`
+
+### 6.3 Rails console
+
+Type `rails console` or `rails c` in your terminal. By default rails console loads as development environment, you can load into different environment by typing `rails console production`
+
+Rails console is nothing but an `irb` with Rails application included in it. You can check the contents of every model from Rails console. for example open rails console and type in `subject = Subject.new` this will list out which will output your Subject class `#<Subject id: nil, name: nil, position: nil, visible: false, created_at: nil, updated_at: nil>`
