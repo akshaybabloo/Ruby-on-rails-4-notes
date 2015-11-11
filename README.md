@@ -631,3 +631,23 @@ A problem I faced when doing `rake db:migrate VERSION=0` is that I would get an 
 3. `rake db:migrate` - which migrates the tables
 
 This should create all the tables and migrate the data for you. At this point you can also do `rake db:migrate VERSION=0`.
+
+### 5.10 Migrations for CMS
+
+Lets create model for our CMS.
+
+We would have to create three models; `Subject`, `Pages` and `Section`. These can be created by the following command:
+```
+rails generate model Subject
+rails generate model Pages
+rails generate model Section
+```
+Once done lets edit migration files. See
+```
+20151111010749_create_subjects.rb
+20151111010814_create_pages.rb
+20151111010820_create_sections.rb
+```
+Once the files are edited with its column names type `rake db:migrate` in terminal.
+
+ 
