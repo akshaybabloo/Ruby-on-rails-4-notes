@@ -760,7 +760,7 @@ SQL (7.2ms)  INSERT INTO `subjects` (`name`, `position`, `visible`, `created_at`
 => true
 ```
 
-Using create technique you can do the following:
+Using **create** technique which is also know as `mass assignment` you can do the following:
 ```
 subject = Subject.create(:name => 'subject_name', :position => 2)
 ```
@@ -770,4 +770,65 @@ this will print and return
 SQL (0.4ms)  INSERT INTO `subjects` (`name`, `position`, `created_at`, `updated_at`) VALUES ('subject_name', 2, '2015-11-11 04:27:21', '2015-11-11 04:27:21')
 (1.8ms)  COMMIT
 => #<Subject id: 2, name: "subject_name", position: 2, visible: false, created_at: "2015-11-11 04:27:21", updated_at: "2015-11-11 04:27:21">
+```
+You can check the contents of the mysql by logging in as `simple_cms` and entering the query `select * from subjects;`
+```
++----+--------------+----------+---------+---------------------+---------------------+
+| id | name         | position | visible | created_at          | updated_at          |
++----+--------------+----------+---------+---------------------+---------------------+
+|  1 | some_name    |        1 |       1 | 2015-11-11 04:22:10 | 2015-11-11 04:22:10 |
+|  2 | subject_name |        2 |       0 | 2015-11-11 04:27:21 | 2015-11-11 04:27:21 |
++----+--------------+----------+---------+---------------------+---------------------+
+```
+
+In the ruby file then you can do something like this once the record is created:
+```
+if subject.save
+  # do something
+else
+  # do something
+end
+```
+### 6.5 Updating records
+
+There are two ways of doing it
+
+**Find/save**
+
+1. Find record
+2. Set values
+3. Save
+
+**Find/update_records**
+
+1. Find record
+2. Set values and save it
+
+To find a subject type in `subject = Subject.find(1)` where `1` is the Primary Key (PK) in rails console. This will create sql query and return an object as
+```
+Subject Load (2.5ms)  SELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1
+=> #<Subject id: 1, name: "some_name", position: 1, visible: true, created_at: "2015-11-11 04:22:10", updated_at: "2015-11-11 04:22:10">
+```
+Now you can type `subject.name = 'update subject'` and then `subject.save`. This will return
+```
+subject.save
+   (0.2ms)  BEGIN
+  SQL (2.7ms)  UPDATE `subjects` SET `name` = 'update subject', `updated_at` = '2015-11-11 05:25:51' WHERE `subjects`.`id` = 1
+   (1.4ms)  COMMIT
+=> true
+```
+Using mass assignment you can do:
+
+1. subject = Subject.find(2)
+2. subject.update_attributes(:name => 'next subject', :visible => true)
+
+This will update the record.
+
+Now once update you can do something like this:
+```
+if subject.update_attributes(:name => 'nect subject')
+  # do something
+else
+  # do something
+end
 ```
