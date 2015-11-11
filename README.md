@@ -741,3 +741,33 @@ The following are the steps
 There is only one step
 
 1. Instantiate object, Set values and Save
+
+Open terminal and enter `rails console`.
+
+In here you can enter `subject = Subject.new` which will print out
+```
+=> #<Subject id: nil, name: nil, position: nil, visible: false, created_at: nil, updated_at: nil>
+```
+You can add remove data by typing `subject.name = 'some_name'`, when you enter `subject.name` you will get `some_name`. The other way is to do the following
+```
+subject = Subject.new(:name => 'some_name', :position => 1, :visible => true)
+```
+Then to save it type `subject.save` this will save and print out the sql string like this:
+```
+(0.9ms)  BEGIN
+SQL (7.2ms)  INSERT INTO `subjects` (`name`, `position`, `visible`, `created_at`, `updated_at`) VALUES ('some_name', 1, 1, '2015-11-11 04:22:10', '2015-11-11 04:22:10')
+(5.4ms)  COMMIT
+=> true
+```
+
+Using create technique you can do the following:
+```
+subject = Subject.create(:name => 'subject_name', :position => 2)
+```
+this will print and return
+```
+(0.1ms)  BEGIN
+SQL (0.4ms)  INSERT INTO `subjects` (`name`, `position`, `created_at`, `updated_at`) VALUES ('subject_name', 2, '2015-11-11 04:27:21', '2015-11-11 04:27:21')
+(1.8ms)  COMMIT
+=> #<Subject id: 2, name: "subject_name", position: 2, visible: false, created_at: "2015-11-11 04:27:21", updated_at: "2015-11-11 04:27:21">
+```
