@@ -615,3 +615,19 @@ Execute migration method - `execute('any sql string')` - this executes any sql s
 Lets test it out:
 
 Type `rails generate migration AlterUsers`, see `/db/migrate/20151110061255_alter_users.rb`
+
+### 4.9 Solving migration problems
+
+A problem I faced when doing `rake db:migrate VERSION=0` is that I would get an error as `Index name 'index_admin_users_on_username' on table 'admin_users' does not exist`. Then I tried the following commands:
+
+1. `rake db:drop` - which drops all the tables
+2. `rake db:create` - which creates all the tables
+3. `rake db:migrate` - which migrates the tables
+
+`rake db:drop` and `rake db:create` gave me an `access denied` error. That means the problem is with MySQL not with Rails. So I had to give permission to `simple_cms` user. To do that open your MySQL root user in terminal by typing `mysql -u root -p` and enter the password. Now type `GRANT ALL PRIVILEGES ON * . * TO 'simple_cms'@'localhost';` this means that you are providing all the privileges to this user. Once this is done go back to the terminal and type these three commands:
+
+1. `rake db:drop` - which drops all the tables
+2. `rake db:create` - which creates all the tables
+3. `rake db:migrate` - which migrates the tables
+
+This should create all the tables and migrate the data for you. At this point you can also do `rake db:migrate VERSION=0`.

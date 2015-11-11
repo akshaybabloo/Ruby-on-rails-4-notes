@@ -14,13 +14,15 @@
 ActiveRecord::Schema.define(version: 20151110062439) do
 
   create_table "admin_users", force: :cascade do |t|
-    t.string   "first_name", limit: 25
-    t.string   "last_name",  limit: 50
-    t.string   "email",      limit: 100, default: "", null: false
-    t.string   "username",   limit: 25
-    t.string   "password",   limit: 40
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "first_name",      limit: 25
+    t.string   "last_name",       limit: 50
+    t.string   "email",           limit: 100, default: "", null: false
+    t.string   "username",        limit: 25
+    t.string   "hashed_password", limit: 40
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
+
+  add_index "admin_users", ["username"], name: "index_admin_users_on_username", using: :btree
 
 end
