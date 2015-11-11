@@ -723,3 +723,21 @@ Remember we changed the table name `users` to `admin_users`, this can be seen in
 Type `rails console` or `rails c` in your terminal. By default rails console loads as development environment, you can load into different environment by typing `rails console production`
 
 Rails console is nothing but an `irb` with Rails application included in it. You can check the contents of every model from Rails console. for example open rails console and type in `subject = Subject.new` this will list out which will output your Subject class `#<Subject id: nil, name: nil, position: nil, visible: false, created_at: nil, updated_at: nil>`
+
+### 6.4 Creating records
+
+Creating records through rails console. There are two ways of doing it:
+
+**New/save**
+
+The following are the steps
+
+1. Instantiate object
+2. Set values
+3. Save
+
+**Create**
+
+There is only one step
+
+1. Instantiate object, Set values and Save
