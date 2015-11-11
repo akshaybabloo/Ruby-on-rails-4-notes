@@ -650,4 +650,6 @@ Once done lets edit migration files. See
 ```
 Once the files are edited with its column names type `rake db:migrate` in terminal.
 
- 
+## 6. Models, ActiveRecord and ActiveRelation
+
+In this chapter we will learn the working principal of Models, ActiveRecord and ActiveRelation
