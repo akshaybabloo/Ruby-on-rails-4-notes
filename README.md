@@ -653,3 +653,42 @@ Once the files are edited with its column names type `rake db:migrate` in termin
 ## 6. Models, ActiveRecord and ActiveRelation
 
 In this chapter we will learn the working principal of Models, ActiveRecord and ActiveRelation
+
+### 6.1 ActiveRecord and ActiveRelation
+
+#### 6.1.1 ActiveRecord
+
+When written in all lower case with space `active record` - it is a design pattern for relational databases, which is not a part of Rails and can be implemented in any object oriented programming. but when written as `ActiveRecord` - it is a rails implementation of design pattern. It helps us to retrieve and manipulate data as objects, not as static rows.
+
+These objects are pretty intelligent, which means that they understand the structure of the table, contains the data retrieved from the row, it know how to CRUD and can be manipulated as objects and then they can be saved.
+
+For example:
+
+```
+user = User.new # instance of User class
+
+user.first_name = 'akshay'
+user.save # executes an sql insert command
+
+user.last_name = 'gollahalli'
+user.save # if last_name is filled then it will execute sql update command
+
+user.delete # this will execute sql delete command
+```
+
+#### 6.1.2 ActiveRelation
+
+It was added in Rails v3 on wards which is also known as `ARel`. It is an object oriented implementation of relational algebra. ActiveRelation does some complex sql queries behind the scene.
+
+For example:
+```
+users = User.where(:first_name => 'Akshay')
+users = users.order("last_name ASC").limit(5)
+users = users.include(:articles_authored)
+```
+above three lines of code will generate (this might not be the exact sql query that will be generated but just for an idea)
+```
+SELECT users.*, articles.* FROM users LEFT JOIN articles
+ON (users.id = articles.author_id) WHERE users.first_name = 'akshay'
+ordered by last_nem ASC LIMIT 5
+```
