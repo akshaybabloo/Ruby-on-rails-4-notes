@@ -692,3 +692,28 @@ SELECT users.*, articles.* FROM users LEFT JOIN articles
 ON (users.id = articles.author_id) WHERE users.first_name = 'akshay'
 ordered by last_nem ASC LIMIT 5
 ```
+
+### 6.2 Generating a Model
+
+When ever you enter the command `rail generate model Subject`, rails create the following files
+
+```
+db/migrate (everything in migrate is pural):
+
+20151111010749_create_subjects.rb
+    With class name `CreateSubjects` that inherits `ActiveRecord::Migration`
+    And has function
+        def change
+        end
+
+app/modles (everything in model is singular):
+
+subject.rb
+    With class name `Subject` that inherits `ActiveRecord::Base`
+```
+
+Remember we changed the table name `users` to `admin_users`, this can be seen in `20151110062439_alter_users.rb`, when ruby searchs for `admin_users` it will not find the model, to rectify this proble we need to configure rails. This can be done in two ways:
+
+* Open `users.rb` and tell the rails that the name has been chage to something els eby typing `self.table_name = 'admin_users'`
+<center><b>OR</b></center>
+* You can rename the file - `users.rb` -> `admin_users.rb` and the class name - `Users` -> `AdminUsers`
