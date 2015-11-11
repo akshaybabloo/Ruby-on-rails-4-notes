@@ -826,7 +826,7 @@ This will update the record.
 
 Now once update you can do something like this:
 ```
-if subject.update_attributes(:name => 'nect subject')
+if subject.update_attributes(:name => 'next subject')
   # do something
 else
   # do something
@@ -851,3 +851,16 @@ SQL (0.4ms)  DELETE FROM `subjects` WHERE `subjects`.`id` = 3
  (0.6ms)  COMMIT
 => #<Subject id: 3, name: "bad subject", position: 3, visible: false, created_at: "2015-11-11 05:38:13", updated_at: "2015-11-11 05:38:13">
 ```
+
+### 6.7 Finding records
+
+The following are the types of finding the records
+
+* Primary key finder - This can be done using `Subject.find(2)` - This returns an object or an error
+* Dynamic finders - syntax is `Subject.find_by_id(2)` - returns an object or nil **OR** `Subject.find_by_name('some name')` that means that you can find anything with the column name.
+* All - syntax is `Subject.all` - returns an array of objects
+* First/last methods - syntax is `Subject.first` and `Subject.last` - this returns an object or nil.
+
+All codes given above goes to the mysql as soon as the code is executed where as `ActiveRelation` does not.
+
+Lets create a record by typing `subject = Subject.create(:name => 'your name', :position => 3)` then to test out the difference you can try to find a deleted record by typing `subject = Subject.find(3)` this will give you a full stack error that will in production will show you `404` or `500` error, you can change the finding by doing `subject =Subject.find_by_id(3)` which will generate the exact sql query but it will return `nil`.
