@@ -715,5 +715,5 @@ subject.rb
 Remember we changed the table name `users` to `admin_users`, this can be seen in `20151110062439_alter_users.rb`, when ruby searchs for `admin_users` it will not find the model, to rectify this proble we need to configure rails. This can be done in two ways:
 
 * Open `users.rb` and tell the rails that the name has been chage to something els eby typing `self.table_name = 'admin_users'`
-<br><center><b>OR</b></center>
+<p align="center"><b>OR</b></p>
 * You can rename the file - `users.rb` -> `admin_users.rb` and the class name - `Users` -> `AdminUsers`
