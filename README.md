@@ -832,3 +832,22 @@ else
   # do something
 end
 ```
+
+### 6.6 Deleting records
+
+You can do that by doing
+
+1. Find record and then
+2. Destroy
+
+Do the following:
+
+1. create a new subject by typing `subject = Subject.create(:name => 'bad subject', :position => 3)`
+2. next find the subject `subject = Subject.find(3)`
+3. then do `subject.destroy`. This will return
+```
+(0.2ms)  BEGIN
+SQL (0.4ms)  DELETE FROM `subjects` WHERE `subjects`.`id` = 3
+ (0.6ms)  COMMIT
+=> #<Subject id: 3, name: "bad subject", position: 3, visible: false, created_at: "2015-11-11 05:38:13", updated_at: "2015-11-11 05:38:13">
+```
