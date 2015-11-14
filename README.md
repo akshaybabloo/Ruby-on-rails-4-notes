@@ -442,13 +442,13 @@ Lets create a database:
 * You can show databases available by entering `SHOW DATABASES;`. This will list out all default installed databases.
 *  To create a data base type `CREATE DATABASE simple_cms_development;`. This will reply with `Query OK, 1 row affected (0.03 sec)` which means that a database has been created. You can conform this by typing `SHOW DATABASE;`
 * It is not a good idea to give Rails all the permissions of `root`, it is better to create a username for the Rails to use the database and give the permissions to use the database just created. To do that the syntax for that is
-```mysql
+```sql
 GRANT ALL PRIVILEGES ON database_name.*
 TO 'username'@'localhost'
 IDENTIFIED BY 'password';
 ```
 So to create and grant permissions do the following
-```mysql
+```sql
 GRANT ALL PRIVILEGES ON simple_cms_development.*
 TO 'simple_cms'@'localhost'
 IDENTIFIED BY 'akshay12';
@@ -687,7 +687,7 @@ users = users.order("last_name ASC").limit(5)
 users = users.include(:articles_authored)
 ```
 above three lines of code will generate (this might not be the exact sql query that will be generated but just for an idea)
-```mysql
+```sql
 SELECT users.*, articles.* FROM users LEFT JOIN articles
 ON (users.id = articles.author_id) WHERE users.first_name = 'akshay'
 ordered by last_nem ASC LIMIT 5
