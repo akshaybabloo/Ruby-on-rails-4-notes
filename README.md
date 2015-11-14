@@ -266,7 +266,7 @@ There are different types of routes, three of those are as follows:
 
 This is a simplest form of routing in Rails. When you run the server and open an link for example `localhost:3000/demo/index`, Rails performs a get request. This get request can be seen in `routes.rb` i.e. `get 'demo/index'`. This small code is a shortcut code for `match` which can be written as
 
-```ruby
+```Ruby
 match 'demo/index',
   :to => 'demo#index',
   :via => :get
