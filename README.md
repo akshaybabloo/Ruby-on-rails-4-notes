@@ -18,7 +18,9 @@
 
 ## 2 Instillation
 
-### 2.1 Step 1: Editing .bash_profile
+### 2.1 Mac
+
+#### 2.1.1 Step 1: Editing .bash_profile
 
 * Open terminal and type `cd ~`, the type `nano .bash_profile`.
 * This will open nano editor with your .bash_profile file. In this file type in the following
@@ -33,20 +35,20 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 * Save the file with `ctrl + x` and `y` for yes.
 
-### 2.2 Step 2: Install XCode and command line tools
+#### 2.1.2 Step 2: Install XCode and command line tools
 
 * Open App store and search for XCode. Click on Install to install the software.  
 * Once the software is installed, open the software then go to `XCode -> Preference`. Goto `Download` tab and download the Command line tools
 
-### 2.3 Step 3: Installing Homebrew
+#### 2.1.3 Step 3: Installing Homebrew
 
 Go to [Homebrew](http://brew.sh/) website and follow the instillation procedure
 
-### 2.4 Step 4: Installing Ruby virtual environment (rbenv)
+#### 2.1.4 Step 4: Installing Ruby virtual environment (rbenv)
 
 Open terminal and type `brew update` to update the list of available software. Then type `brew install rbenv`.
 
-### 2.5 Step 5: Installing Ruby
+#### 2.1.5 Step 5: Installing Ruby
 
 OSX comes preinstalled Ruby 2. To check what version you are using type `ruby -v` in terminal. But we would be using virtual environment to install the latest version of Ruby and Rails. Do the following:
 
@@ -58,17 +60,17 @@ OSX comes preinstalled Ruby 2. To check what version you are using type `ruby -v
 
 You can list out all available versions of Ruby by typing `rbenv list` in the terminal. Like wise to uninstall a ruby version do `rbenv uninstall ####` (where `####` is the version number of Ruby).
 
-### 2.6 Step 6: RubyGems
+#### 2.1.6 Step 6: RubyGems
 
 Ruby comes preinstalled with RubyGems. But it is recommended that you update RubyGems by typing `gem update --system` in the terminal. To list all the installed gems type `gem list` in the terminal. To install a gem type in `gem install gem_name`, likewise to uninstall a gem type `gem uninstall gem_name` in the terminal.
 
-### 2.7 Step 7: Installing Ruby on Rails
+#### 2.1.7 Step 7: Installing Ruby on Rails
 
 Open your terminal and type `gem install rails --no-ri --no-rdoc` (this will not install reference documents and code reference). Once installed type `rbenv rehash`.
 
-### 2.8 Step 8: Installing MySQL and mysql2 gem
+#### 2.1.8 Step 8: Installing MySQL and mysql2 gem
 
-#### 2.8.1 Step 8.1: MySQL
+##### 2.1.8.1 Step 8.1: MySQL
 
 1. Open terminal and type `brew install mysql` this will install the latest MySQL server.
 2. Then copy `launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist` and paste it in the terminal then press enter.
@@ -76,7 +78,7 @@ Open your terminal and type `gem install rails --no-ri --no-rdoc` (this will not
 
 To start the server type `mysql.service start`, likewise to stop type `mysql.service stop` in the terminal.
 
-#### 2.8.2 Step 8.2: mysql2 gem
+##### 2.1.8.2 Step 8.2: mysql2 gem
 
 Open terminal and type `gem install mysql2 0.3.18` this will install the correct version.
 
