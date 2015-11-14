@@ -25,13 +25,13 @@
 * Open terminal and type `cd ~`, the type `nano .bash_profile`.
 * This will open nano editor with your .bash_profile file. In this file type in the following
 
-<pre>
+```sh
 # MySQL
 export PATH="/usr/local/mysql/bin:$PATH"
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-</pre>
+```
 
 * Save the file with `ctrl + x` and `y` for yes.
 
