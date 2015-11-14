@@ -280,7 +280,7 @@ Simple rout is not flexible, that means for every file we would have to create a
 
 Default rout follows `:controller/:action/:id` structure. For example `GET /student/edit/23` which means `student_controller`, `edit action` @ id `23`. So this can be written as the following:
 
-```
+```Ruby
 match `:controller(/:action(/:id))`, :via => :get
 ```
 
@@ -288,7 +288,7 @@ match `:controller(/:action(/:id))`, :via => :get
 
 You can also add the format which can be written as
 
-```
+```Ruby
 match `:controller(/:action(/:id(.:format)))`, :via => :get
 ```
 
@@ -314,7 +314,7 @@ You can access the new html file by typing `localhost:3000/demo/hello`. You are 
 
 Now, if you open `demo_controller.rb` from `app/controllers/` we can see that there is not action specified for the new `hello` template, this is not a problem Rails uses its default template system to render the output. But it is best practice to always define a action function for a temple. so we write the following code in there
 
-```
+```Ruby
 def hello
 end
 ```
@@ -329,7 +329,7 @@ You can redirect a request to different controller or action. This is based on `
 
 You can redirect to different controller or action by using `redirect_to()` method. For example:
 
-```
+```Ruby
 def other_hello
     redirect_to(:controller => 'demo', :action => 'index')
 end
@@ -337,7 +337,7 @@ end
 
 To open this you would have to goto `localhost:3000/demo/other_hello` this will immediately redirect you to `index`. You can see this by looking at the logs in the terminal, which will look like this:
 
-```
+```Sh
 # this is the first request
 Started GET "/demo/other_hello" for ::1 at 2015-11-08 13:30:39 +1300
 Processing by DemoController#other_hello as HTML
@@ -353,7 +353,7 @@ Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.0ms)
 
 You can redirect it to any URL by defining an new action. For example
 
-```
+```Ruby
 def google
  redirect_to('http://www.google.com')
 end
@@ -380,7 +380,7 @@ To use instance we have to use `@` sign before a variable. For example `@instanc
 
 To access a variable in template, we would have to put an instance in a function. For example:
 
-```
+```Ruby
 def hello
   @array = [1,2,3,4]
 end
@@ -388,7 +388,7 @@ end
 
 To use this instance variable in the template just call it by the instance name:
 
-```
+```Ruby
 <% @array.each do |n| %>
   <%= n %><br>
 <% end %>
@@ -442,13 +442,13 @@ Lets create a database:
 * You can show databases available by entering `SHOW DATABASES;`. This will list out all default installed databases.
 *  To create a data base type `CREATE DATABASE simple_cms_development;`. This will reply with `Query OK, 1 row affected (0.03 sec)` which means that a database has been created. You can conform this by typing `SHOW DATABASE;`
 * It is not a good idea to give Rails all the permissions of `root`, it is better to create a username for the Rails to use the database and give the permissions to use the database just created. To do that the syntax for that is
-```
+```mysql
 GRANT ALL PRIVILEGES ON database_name.*
 TO 'username'@'localhost'
 IDENTIFIED BY 'password';
 ```
 So to create and grant permissions do the following
-```
+```mysql
 GRANT ALL PRIVILEGES ON simple_cms_development.*
 TO 'simple_cms'@'localhost'
 IDENTIFIED BY 'akshay12';
@@ -478,7 +478,7 @@ Migrate means to change the state of a database which means that you can create 
 To generate migration type `rails generate migration DoNothingYet` in the terminal. This will create a folder called `migrate` under `db/`. There are two ways of doing migrations in Rails. One using `change` and the other is using `up` and `down`. See `db/migrate/0151110041214_do_nothing_yet.rb`.
 
 The other way to create migrations is to create a model. To do that type in `rails generate model User` on terminal, this will create few files for us. That will give you an output like this
-```
+```Sh
 invoke  active_record
    create    db/migrate/20151110041214_do_nothing_yet.rb
 akshayrajgollahalli:simple_cms (master): rails generate model User
@@ -585,7 +585,7 @@ Running migrate command are as follows
 There are different types of table migration methods, few of them are
 
 1. To create a table
-```
+```Ruby
 create_table(table, options) do |t|
 .....columns....
 end
@@ -637,7 +637,7 @@ This should create all the tables and migrate the data for you. At this point yo
 Lets create model for our CMS.
 
 We would have to create three models; `Subject`, `Pages` and `Section`. These can be created by the following command:
-```
+```sh
 rails generate model Subject
 rails generate model Pages
 rails generate model Section
@@ -664,7 +664,7 @@ These objects are pretty intelligent, which means that they understand the struc
 
 For example:
 
-```
+```Ruby
 user = User.new # instance of User class
 
 user.first_name = 'akshay'
@@ -681,13 +681,13 @@ user.delete # this will execute sql delete command
 It was added in Rails v3 on wards which is also known as `ARel`. It is an object oriented implementation of relational algebra. ActiveRelation does some complex sql queries behind the scene.
 
 For example:
-```
+```Ruby
 users = User.where(:first_name => 'Akshay')
 users = users.order("last_name ASC").limit(5)
 users = users.include(:articles_authored)
 ```
 above three lines of code will generate (this might not be the exact sql query that will be generated but just for an idea)
-```
+```mysql
 SELECT users.*, articles.* FROM users LEFT JOIN articles
 ON (users.id = articles.author_id) WHERE users.first_name = 'akshay'
 ordered by last_nem ASC LIMIT 5
@@ -749,7 +749,7 @@ In here you can enter `subject = Subject.new` which will print out
 => #<Subject id: nil, name: nil, position: nil, visible: false, created_at: nil, updated_at: nil>
 ```
 You can add remove data by typing `subject.name = 'some_name'`, when you enter `subject.name` you will get `some_name`. The other way is to do the following
-```
+```Ruby
 subject = Subject.new(:name => 'some_name', :position => 1, :visible => true)
 ```
 Then to save it type `subject.save` this will save and print out the sql string like this:
@@ -761,7 +761,7 @@ SQL (7.2ms)  INSERT INTO `subjects` (`name`, `position`, `visible`, `created_at`
 ```
 
 Using **create** technique which is also know as `mass assignment` you can do the following:
-```
+```Ruby
 subject = Subject.create(:name => 'subject_name', :position => 2)
 ```
 this will print and return
@@ -782,7 +782,7 @@ You can check the contents of the mysql by logging in as `simple_cms` and enteri
 ```
 
 In the ruby file then you can do something like this once the record is created:
-```
+```Ruby
 if subject.save
   # do something
 else
@@ -825,7 +825,7 @@ Using mass assignment you can do:
 This will update the record.
 
 Now once update you can do something like this:
-```
+```Ruby
 if subject.update_attributes(:name => 'next subject')
   # do something
 else
