@@ -339,7 +339,7 @@ end
 
 To open this you would have to goto `localhost:3000/demo/other_hello` this will immediately redirect you to `index`. You can see this by looking at the logs in the terminal, which will look like this:
 
-```Sh
+```
 # this is the first request
 Started GET "/demo/other_hello" for ::1 at 2015-11-08 13:30:39 +1300
 Processing by DemoController#other_hello as HTML
@@ -390,7 +390,7 @@ end
 
 To use this instance variable in the template just call it by the instance name:
 
-```Ruby
+```HTML+ERB
 <% @array.each do |n| %>
   <%= n %><br>
 <% end %>
@@ -867,7 +867,7 @@ All codes given above goes to the mysql as soon as the code is executed where as
 
 Lets create a record by typing `subject = Subject.create(:name => 'your name', :position => 3)` then to test out the difference you can try to find a deleted record by typing `subject = Subject.find(3)` this will give you a full stack error that will in production will show you `404` or `500` error, you can change the finding by doing `subject =Subject.find_by_id(3)` which will generate the exact sql query but it will return `nil`.
 
-### 6.8 Conditional queries
+### 6.8 Conditional: Where
 
 For complex queries where conditions are involved `where(condition)` is used.
 
@@ -919,7 +919,6 @@ With array:
 ```Ruby
 subject = Subject.where(['visible = ?', true])
 ```
-<br>
 **OR**
 <br>
 ```Ruby
