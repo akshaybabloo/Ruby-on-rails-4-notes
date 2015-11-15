@@ -1028,4 +1028,15 @@ There are different types of table associations, such as
 
 ### 7.1 One-to-one associations
 
-:<img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-1.png" width="300">:
+#container {
+    height:100px;
+    line-height:100px;
+}
+
+#container img {
+    vertical-align:middle;
+    max-height:100%;
+}
+<div id="container">
+<img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-1.png" width="300">
+</div>
