@@ -1028,4 +1028,4 @@ There are different types of table associations, such as
 
 ### 7.1 One-to-one associations
 
-<img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-1.png" width="100">
+<center><img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-1.png" width="300"></center>
