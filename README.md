@@ -934,3 +934,52 @@ which returns
 Subject Load (18.0ms)  SELECT `subjects`.* FROM `subjects` WHERE `subjects`.`visible` = 1 AND `subjects`.`position` = 1
 => #<ActiveRecord::Relation [#<Subject id: 1, name: "update subject", position: 1, visible: true, created_at: "2015-11-11 04:22:10", updated_at: "2015-11-11 05:25:51">]>
 ```
+
+### 6.9 Conditional: Order, Limit and Offset
+
+Order - You can sort the queries by doing `order(sql)`
+Limit - You can limit an query by a number `limit(number)`
+Offset - This will enable you to skip over the records by a number `offset(number)`
+
+For example
+```Ruby
+Subject.order('position ASC').limit(10).offset(30)
+```
+
+Usually you would not give the table name when you use order. The problem would start when you start joining two tables, like joining a two columns of different tables.
+
+Open your rails console and do the following:
+
+```Ruby
+subject = Subject.where(:visible => false).order("position DESC")
+```
+which will return
+```
+Subject Load (16.8ms)  SELECT `subjects`.* FROM `subjects` WHERE `subjects`.`visible` = 0  ORDER BY position DESC
+=> #<ActiveRecord::Relation [#<Subject id: 4, name: "your name", position: 3, visible: false, created_at: "2015-11-11 06:15:32", updated_at: "2015-11-11 06:15:32">, #<Subject id: 2, name: "subject_name", position: 2, visible: false, created_at: "2015-11-11 04:27:21", updated_at: "2015-11-11 04:27:21">]>
+```
+
+You can limit it by `1` doing the following:
+```Ruby
+subject = Subject.where(:visible => false).order("position DESC").limit(1)
+```
+This will return
+```
+Subject Load (0.8ms)  SELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`visible` = 0  ORDER BY position DESC LIMIT 1
+=> #<ActiveRecord::Relation [#<Subject id: 4, name: "your name", position: 3, visible: false, created_at: "2015-11-11 06:15:32", updated_at: "2015-11-11 06:15:32">]>
+```
+
+You can offset (skip) by doing:
+```Ruby
+subject = Subject.where(:visible => false).order("position DESC").limit(1).offset(1)
+```
+which will return
+```
+Subject Load (0.4ms)  SELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`visible` = 0  ORDER BY position DESC LIMIT 1 OFFSET 1
+=> #<ActiveRecord::Relation [#<Subject id: 2, name: "subject_name", position: 2, visible: false, created_at: "2015-11-11 04:27:21", updated_at: "2015-11-11 04:27:21">]>
+```
+
+You can also specify the table name, in this case its `subjects` by doing:
+```Ruby
+subject = Subject.where(:visible => false).order("subjects.position DESC").limit(1).offset(1)
+```
