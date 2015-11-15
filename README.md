@@ -1017,3 +1017,15 @@ scope :name_of_the_scope, lambda {|your_name| where(:name => your_name)}
 Lets test it out. Open `/apps/models/subjects.rb`. see [subjects.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/models/subject.rb)
 
 Once you have written the code, you would have you reload the rails console so that this new class is loaded. To get a query type in `Subject.visible` this will return all the `:visible => true`
+
+## 7 Table associations
+
+There are different types of table associations, such as
+
+* [One-to-one associations]
+* [One-to-many associations]
+* [Many-to-many associations]
+
+### 7.1 One-to-one associations
+
+<img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-1.png" width="100">
