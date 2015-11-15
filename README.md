@@ -1022,21 +1022,22 @@ Once you have written the code, you would have you reload the rails console so t
 
 There are different types of table associations, such as
 
-* [One-to-one associations]
-* [One-to-many associations]
-* [Many-to-many associations]
+* [One-to-one associations](#71-one-to-one-associations)
+* [One-to-many associations](#72-one-to-many-associations)
+* [Many-to-many associations](#73-many-to-many-associations)
 
 ### 7.1 One-to-one associations
 
-#container {
-    height:100px;
-    line-height:100px;
-}
-
-#container img {
-    vertical-align:middle;
-    max-height:100%;
-}
-<div id="container">
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-1.png" width="300">
-</div>
+
+A One-to-one association means, every class table has one teacher table teaching. Here teacher is the foreign key.
+
+### 7.2 One-to-many associations
+
+<img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-many.png" width="300">
+
+A One-to-many association means, ever teacher table has many subjects table associated to them.
+
+### 7.3 Many-to-many associations
+
+<img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/many-2-many.png" width="300">
