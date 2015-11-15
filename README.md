@@ -866,3 +866,72 @@ The following are the types of finding the records
 All codes given above goes to the mysql as soon as the code is executed where as `ActiveRelation` does not.
 
 Lets create a record by typing `subject = Subject.create(:name => 'your name', :position => 3)` then to test out the difference you can try to find a deleted record by typing `subject = Subject.find(3)` this will give you a full stack error that will in production will show you `404` or `500` error, you can change the finding by doing `subject =Subject.find_by_id(3)` which will generate the exact sql query but it will return `nil`.
+
+### 6.8 Conditional queries
+
+For complex queries where conditions are involved `where(condition)` is used.
+
+For example
+
+```Ruby
+Subject.where(:visible => true)
+```
+This will be looking out for all subjects who's visibility is true. This will return ActiveRelation method which can be daisy chained with others.
+
+For example
+
+```Ruby
+Subject.where(:visible => true).order("position ASC")
+```
+This does not immediately call a database query immediately, Rails first combines the query and then request the call.
+
+**Types**
+
+* Strings - `where("name = 'some name' AND visible = true")` - This is susceptible to SQL injection.
+* Arrays - `where(["name = ? AND visible = true", "first_name"])` - where the question mark is a place holder for `first_name` this is flexible and is safe from SQL injection.
+* Hash - `Subject.where(:name = 'akshay', :visible => true)` - easy and safe from SQL injection. Eave key vale pair is joined by `AND`. Hash cannot have OR, Like, less than or greater than.
+
+Goto your rails console and do the following examples:
+
+```Ruby
+subject = Subject.where(:visible => true)
+```
+Which will return an array
+```
+ Subject Load (18.2ms)  SELECT `subjects`.* FROM `subjects` WHERE `subjects`.`visible` = 1
+=> #<ActiveRecord::Relation [#<Subject id: 1, name: "update subject", position: 1, visible: true, created_at: "2015-11-11 04:22:10", updated_at: "2015-11-11 05:25:51">]>
+```
+You can also ask rails to show you the generated sql by doing `subject.to_sql` which will return:
+```sql
+SELECT `subjects`.* FROM `subjects` WHERE `subjects`.`visible` = 1
+```
+You can use this by putting in a string:
+```Ruby
+subject = Subject.where('visible = true')
+```
+Which will return
+```
+Subject.where('visible = true')
+  Subject Load (6.2ms)  SELECT `subjects`.* FROM `subjects` WHERE (visible = true)
+=> #<ActiveRecord::Relation [#<Subject id: 1, name: "update subject", position: 1, visible: true, created_at: "2015-11-11 04:22:10", updated_at: "2015-11-11 05:25:51">]>
+```
+With array:
+```Ruby
+subject = Subject.where(['visible = ?', true])
+```
+<br>
+**OR**
+<br>
+```Ruby
+subject = Subject.where('visible = ?', true)
+```
+
+You can also daisy chain the query by doing:
+```Ruby
+subject = Subject.where(:visible => true).where(:position => 1)
+```
+which returns
+```
+Subject Load (18.0ms)  SELECT `subjects`.* FROM `subjects` WHERE `subjects`.`visible` = 1 AND `subjects`.`position` = 1
+=> #<ActiveRecord::Relation [#<Subject id: 1, name: "update subject", position: 1, visible: true, created_at: "2015-11-11 04:22:10", updated_at: "2015-11-11 05:25:51">]>
+```
