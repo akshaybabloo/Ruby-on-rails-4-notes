@@ -983,3 +983,37 @@ You can also specify the table name, in this case its `subjects` by doing:
 ```Ruby
 subject = Subject.where(:visible => false).order("subjects.position DESC").limit(1).offset(1)
 ```
+
+### 6.10 Named Scopes
+
+You can write custom queries with names scopes.
+
+To define a scope the syntax for that is:
+
+```Ruby
+scope :name_of_the_scope, lambda {where(:active => true)}  
+```
+**OR**
+<br>
+Using `stabby lambda syntax`
+```Ruby
+scope :name_of_the_scope, -> {where(:active => true)}  
+```
+
+There are differences between using `lambda` and `stabby lambda`, but we will stick to `lambda`
+
+A lambda `lambda {where(:active => true)}` can be `def` as
+```Ruby
+def self.active
+  where(:active => true)
+end
+```
+
+Named scopes can also take in arguments, which can be written as
+```Ruby
+scope :name_of_the_scope, lambda {|your_name| where(:name => your_name)}  
+```
+
+Lets test it out. Open `/apps/models/subjects.rb`. see [subjects.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/models/subject.rb)
+
+Once you have written the code, you would have you reload the rails console so that this new class is loaded. To get a query type in `Subject.visible` this will return all the `:visible => true`
