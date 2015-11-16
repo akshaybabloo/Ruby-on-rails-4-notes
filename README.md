@@ -1042,4 +1042,4 @@ A One-to-many association means, ever teacher table has many subjects table asso
 
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/many-2-many.jpg" width="300">
 
-A course has many students and vice versa. So there are two foreign key, they go in a third table called join table.
+A course has many students and vice versa. So there are two foreign key, they go in a third table called join table. This means a student can have more than one subject, that subject is called by its FK which is stored in an another table.
