@@ -1030,16 +1030,28 @@ There are different types of table associations, such as
 
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-1.png" width="300">
 
-A One-to-one association means, every class table has one teacher table teaching. Here teacher is the foreign key.
+A One-to-one association means, every class table has one teacher table teaching. Here teacher is the foreign key. In rails you can write it as
+```Ruby
+Classroom has_one :teacher
+Teacher belongs_to :classroom
+```
 
 ### 7.2 One-to-many associations
 
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-many.png" width="300">
 
-A One-to-many association means, ever teacher table has many subjects table associated to them.
+A One-to-many association means, ever teacher table has many subjects table associated to them. In rails you can write it as
+```Ruby
+Teacher has_many :courses # one-to-many
+Course belongs_to :teacher # many-to-one
+```
 
 ### 7.3 Many-to-many associations
 
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/many-2-many.jpg" width="300">
 
-A course has many students and vice versa. So there are two foreign key, they go in a third table called join table. This means a student can have more than one subject, that subject is called by its FK which is stored in an another table.
+A course has many students and vice versa. So there are two foreign key, they go in a third table called join table. This means a student can have more than one subject, that subject is called by its FK which is stored in an another table. In rails you can write it as
+```Ruby
+Course has_and_belongs_to_many :students
+Student has_and_belongs_to_many :courses
+```
