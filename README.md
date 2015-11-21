@@ -531,7 +531,7 @@ To migrate type `rake db:migrate` in the terminal and this is its output:
 == 20151110042612 CreateUsers: migrated (0.0313s) =============================
 ```
 
-This will create two tables, you can log into mysql by doing `mysql -u simple_cms -p simple_cms_development`. you can list out table by typing `SHOW TABLES`. Then you can list out the fields associate to each table by typing `SHOW FIELDS FROM users;` which will print
+This will create two tables, you can log into mysql by doing `mysql -u simple_cms -p simple_cms_development`. you can list out table by typing `SHOW TABLES`. Then you can list out the fields associate to each table by typing `SHOW FIELDS FROM users;` or `DESC users` or `DESCRIBE users` which will print
 ```
 +------------+--------------+------+-----+---------+----------------+
 | Field      | Type         | Null | Key | Default | Extra          |
@@ -1035,7 +1035,82 @@ A One-to-one association means, every class table has one teacher table teaching
 Classroom has_one :teacher
 Teacher belongs_to :classroom
 ```
+A one-to-one relationships can be used in two scenario:
 
+1. A person or a thing is unique. - Example `Student has_one :id`
+2. Breaking a singling table into multiple. - Example `Customer has_one :address` - This can be done to make sure that there are no cluttering and also sometimes a `Customer` table is used more and the `Address` is not used that much.
+
+It is not common to use one-to-one relationships. In the final project we will be using one-to-many relationship, the code written here will not be used.
+
+**Subject - Page relationship**
+
+```Ruby
+Subject has_one :page
+Page belongs_to :subject
+```
+> Tip 1: Any class which has `belons_to` should have the foreign key.
+
+see [subject.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/models/subject.rb) and [page.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/models/page.rb)
+
+Now lets try in in `rails console`.
+
+Type in
+```Ruby
+subject = Subject.find(1)
+```
+this will return find with the id that is
+```
+Subject Load (29.2ms)  SELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1
+=> #<Subject id: 1, name: "update subject", position: 1, visible: true, created_at: "2015-11-11 04:22:10", updated_at: "2015-11-11 05:25:51">
+```
+
+next
+```Ruby
+subject.page
+```
+which will return
+```
+Page Load (1.5ms)  SELECT  `pages`.* FROM `pages` WHERE `pages`.`subject_id` = 1 LIMIT 1
+=> nil
+```
+You will not get an error, but look at the sql it has generated.
+
+Now lets add some data to `pages` table by typing
+
+```Ruby
+first_page = Page.new(:name => 'first_name', :permalink => 'first', :position => 1)
+```
+At this point we haven't saved the query yet. But to make a relation we would have to save it as a foreign key to `Subject`. Type in
+```Ruby
+subject.page = first_page
+```
+This will create an insert query which will return something like this.
+```sql
+Page Load (4.0ms)  SELECT  `pages`.* FROM `pages` WHERE `pages`.`subject_id` = 1 LIMIT 1
+ (0.8ms)  BEGIN
+SQL (10.1ms)  INSERT INTO `pages` (`name`, `permalink`, `position`, `subject_id`, `created_at`, `updated_at`) VALUES ('first_name', 0, 1, 1, '2015-11-21 23:41:30', '2015-11-21 23:41:30')
+ (1.4ms)  COMMIT
+=> #<Page id: 1, subject_id: 1, name: "first_name", permalink: 0, position: 1, visible: false, created_at: "2015-11-21 23:41:30", updated_at: "2015-11-21 23:41:30">
+```
+Now I can get the relational data by either calling `subject.page` or `first_page.subject`
+
+To unrelate the data you could do `subject.page = nil` or to completely remove the data you could do
+```Ruby
+subject.page.destroy
+```
+which will return
+```sql
+(0.5ms)  BEGIN
+ SQL (22.9ms)  DELETE FROM `pages` WHERE `pages`.`id` = 1
+  (4.1ms)  COMMIT
+=> #<Page id: 1, subject_id: 1, name: "first_name", permalink: 0, position: 1, visible: false, created_at: "2015-11-21 23:41:30", updated_at: "2015-11-21 23:41:30">
+```
+
+Even though the page content is removed when you enter `subject.page` is entered the data entered in to it is rreturned This is because rails keeps the data temporarly. So to get rid of this completely type in
+```Ruby
+subject.page(true)
+```
+This acts like a reload page.
 ### 7.2 One-to-many associations
 
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-many.png" width="300">
@@ -1055,3 +1130,4 @@ A course has many students and vice versa. So there are two foreign key, they go
 Course has_and_belongs_to_many :students
 Student has_and_belongs_to_many :courses
 ```
+Also know as HABTM method.

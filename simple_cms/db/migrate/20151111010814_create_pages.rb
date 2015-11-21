@@ -9,7 +9,7 @@ class CreatePages < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index('pages', 'subject_id')
+    add_index('pages', 'subject_id') # FK
     add_index('pages', 'permalink')
   end
 

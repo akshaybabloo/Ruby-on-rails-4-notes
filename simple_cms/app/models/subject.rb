@@ -1,5 +1,7 @@
 class Subject < ActiveRecord::Base
 
+  has_one :page # one-to-one relationship
+
   # with scope you can make custom queries. Just call with class name, example `Subject.visible`
   scope :visible, lambda{where(:visible => true)}
   scope :invisible, lambda{where(:visible => false)}
