@@ -6,7 +6,7 @@
 
 ### 1.1 Mac
 
-1. Edit .bash_profile
+1. Edit `.bash_profile`
 2. Xcode and command line tools (gcc -v to conform)
 3. Homebrew
 4. Ruby virtual environment (rbenv)
@@ -58,7 +58,7 @@ OSX comes preinstalled Ruby 2. To check what version you are using type `ruby -v
 
 > Always rehash the Ruby virtual environment by typing `rbenv rehash` in your terminal.
 
-You can list out all available versions of Ruby by typing `rbenv list` in the terminal. Like wise to uninstall a ruby version do `rbenv uninstall ####` (where `####` is the version number of Ruby).
+You can list out all available versions of Ruby by typing `rbenv list` in the terminal. Like wise to uninstall a Ruby version do `rbenv uninstall ####` (where `####` is the version number of Ruby).
 
 #### 2.1.6 Step 6: RubyGems
 
@@ -80,7 +80,7 @@ To start the server type `mysql.service start`, likewise to stop type `mysql.ser
 
 ##### 2.1.8.2 Step 8.2: mysql2 gem
 
-Open terminal and type `gem install mysql2 0.3.18` this will install the correct version.
+Open the terminal and type `gem install mysql2 0.3.18` this will install the correct version.
 
 ## 3 Creating and running an application
 
@@ -88,11 +88,11 @@ Following are the steps:
 
 ### 3.1 Creating new application
 
-Type `rails new via_command_line -d mysql` for pre-configured rails and msql project files.
+Type `rails new via_command_line -d mysql` for pre-configured Rails and msql project files.
 
 ### 3.2 Introduction to bundler
 
-There are two file which are important to Bundler:
+Two files are necessary to Bundler:
 
 `gemfile` - edit this file to add your gems <br>
 `gemfile.lock` - do not edit it yourself
@@ -105,19 +105,19 @@ Once you have configured what you want to, just type `bundle install` in the ter
 
 #### 3.3.1 Running the server
 
-Open terminal change the directory the application folder and type `rails server` or `rails s`. This will generate a web URL `http://localhost:3000`. Copy the link and open in a web browser. When you open the URL you might have error with `mysql2` due to some bug  in mysql2. So we use mysql2 version 0.3.18; i.e. in you Gemfile add `gem install 'msql2', '0.3.18'`. If you are using sqlite you don't have to make any changes. Once this is done initially you might need to comment out your database name in `config/database.yaml` as we did not create any database yet.
+Open terminal change the directory the application folder and type `rails server` or `rails s`, this will generate a web URL `http://localhost:3000`. Copy the link and open in a web browser. When you open the URL, you might have an error with `mysql2` due to some bug in mysql2. So we use mysql2 version 0.3.18; i.e. in you Gemfile add `gem install 'msql2', '0.3.18'`. If you are using SQLite, you don't have to make any changes. Once this is done initially, you might need to comment out your database name in `config/database.yaml` as we did not create any database yet.
 
 ### 3.4 Generating views and controller
 
 To generate files for Rails project type `rails generate` in the terminal; this will list out all the possible file that Rails can generate for you. To generate a controller and view, type `rails generate controller`, this will list out all the possible files this command can do, but type `rails generate controller controller_name view_name`; i.e `rails generate controller demo index`. This will create files under app folder. You might also want to edit `routes.rb` by typing in `get demo/index`.
 
-At this point we have to edit one file which is under `app/controller/demo_controller.rb`. In this file you would have to type `layout false`, I will explain about this later.
+At this point, we have to edit one file which is under `app/controller/demo_controller.rb`. In this file you would have to type `layout false`, I will explain about this later.
 
-To access this link you would have to goto `http://localhost:3000/demo/index`.
+To access this link, you would have to goto `http://localhost:3000/demo/index`.
 
 ### 3.5 File structure
 
-Below is the complete list of file that are generated when you create a project.
+Below is the complete list of file that is generated when you create a project.
 
 <pre>
 simple_crm
@@ -256,7 +256,7 @@ Now run the server (you don't have to restart the server if it's already running
 
 When a file is not found in the `public` folder, the request is sent to `routes.rb` which determines which `controller` and `view` should be accessed.
 
-Routes are processed as top to bottom.
+Routes are processed from top to bottom.
 
 There are different types of routes, three of those are as follows:
 
@@ -266,7 +266,7 @@ There are different types of routes, three of those are as follows:
 
 #### 3.7.1 Simple rout (Match rout)
 
-This is a simplest form of routing in Rails. When you run the server and open an link for example `localhost:3000/demo/index`, Rails performs a get request. This get request can be seen in `routes.rb` i.e. `get 'demo/index'`. This small code is a shortcut code for `match` which can be written as
+This is the simplest form of routing in Rails. When you run the server and open a link for example `localhost:3000/demo/index`, Rails performs a get request. This get request can be seen in `routes.rb` i.e. `get 'demo/index'`. This small code is a shortcut code for `match` which can be written as
 
 ```Ruby
 match 'demo/index',
@@ -278,7 +278,7 @@ Hence the name Match rout
 
 #### 3.7.2 Default route
 
-Simple rout is not flexible, that means for every file we would have to create a static url. Default rout can have certain rules to do all this automatically.
+The a HTML rout is not flexible; that means we would have to create a static URL for each file. Default rout can have certain rules to do all this automatically.
 
 Default rout follows `:controller/:action/:id` structure. For example `GET /student/edit/23` which means `student_controller`, `edit action` @ id `23`. So this can be written as the following:
 
@@ -298,23 +298,23 @@ match `:controller(/:action(/:id(.:format)))`, :via => :get
 
 If a GET request is made and there are no match found then Rails should redirect to a default place called as `root`. The code for this can be written as `root :to => 'demo#index'` or `root 'demo#index'`
 
-## 4 Controller, views and dynamic content
+## 4 Controller, views, and dynamic content
 
-In this chapter we will look into more detailed approach on MVC architecture.
+In this chapter, we will look into a more detailed approach to MVC architecture.
 
 ### 4.1 Template rendering
 
-Here we will see hoe the controller chooses which view template to render and return back.
+Here we will see how the controller chooses which view template to render and return.
 
 Do the following:
 
 1. Create `hello.html.erb` in `app/view/demo/`
-2. Edit the html file
+2. Edit the HTML file
 3. Run the server
 
-You can access the new html file by typing `localhost:3000/demo/hello`. You are able to do this without editing `routes.rb` because we added `match `:controller(/:action(/:id))`, :via => :get` to it. If this was not there then you would have to manually add an extra GET code `get 'demo/hello'`
+You can access the new HTML file by typing `localhost:3000/demo/hello`. You are able to do this without editing `routes.rb` because we added `match `:controller(/:action(/:id))`, :via => :get` to it. If this were not there, then you would have to add manually an extra GET code `get 'demo/hello'`
 
-Now, if you open `demo_controller.rb` from `app/controllers/` we can see that there is not action specified for the new `hello` template, this is not a problem Rails uses its default template system to render the output. But it is best practice to always define a action function for a temple. so we write the following code in there
+Now, if you open `demo_controller.rb` from `app/controllers/` we can see that there is not action specified for the new `hello` template, this is not a problem Rails uses its default template system to render the output. But it is best practice always to define an action function for a temple. So we write the following code in there
 
 ```Ruby
 def hello
@@ -337,7 +337,7 @@ def other_hello
 end
 ```
 
-To open this you would have to goto `localhost:3000/demo/other_hello` this will immediately redirect you to `index`. You can see this by looking at the logs in the terminal, which will look like this:
+To open this, you would have to go to `localhost:3000/demo/other_hello` this will immediately redirect you to `index`. You can see this by looking at the logs in the terminal, which will look like this:
 
 ```
 # this is the first request
@@ -363,12 +363,12 @@ end
 
 ### 4.3 View template
 
-Till now you have only seen how a web renders an HTML page which is not dynamic. You can put ruby code inside of HTML pages to make them dynamic. To do this we use ERB (Embedded Ruby), it is an eRuby template system. For example we have file in the `view` folder called `index.html.erb`, which means it has a template name as `index`, process it as `ERB` and give an output as `html`
+Till now you have only seen how the web renders an HTML page which is not dynamic. You can put Ruby code inside of HTML pages to make them dynamic. To do this we use ERB (Embedded Ruby), it is an eRuby template system. For example, we have file in the `view` folder called `index.html.erb`, which means it has a template name as `index`, process it as `ERB` and give an output as `html`
 
-You can embed a code in `erb` template with the following syntax:
+You can embed code in `erb` template with the following syntax:
 
 * `<% code %>` - this will only execute the ruby code
-* A variation of the above code is `<%= code %>` - this will execute the ruby code and outputs it
+* A variation of the above code is `<%= code %>` - this will run the ruby code and outputs it
 
 For example open `hello.html.erb` template and do the following
 
@@ -376,11 +376,11 @@ For example open `hello.html.erb` template and do the following
 
 ### 4.4 Instance variable
 
-Instance variables helps in accessing data gathered by the controller and present it to view (template). Ruby is an object oriented programming language, so every class has an instance variable which can be used across the class. If you open `demo_controller.rb` from `app/controller/` you can see that `DemoController` is a subclass (`<`) of `ApplicationController`, that means it's a class which can have instances.
+Instance variables help in accessing data gathered by the controller and present it to view (template). Ruby language is an object-oriented programming language, so every class has an instance variable which can be used across the class. If you open `demo_controller.rb` from `app/controller/` you can see that `DemoController` is a subclass (`<`) of `ApplicationController`, that means it's a class which can have instances.
 
 To use instance we have to use `@` sign before a variable. For example `@instance` (a variable can be anything).
 
-To access a variable in template, we would have to put an instance in a function. For example:
+To access a variable in a template, we would have to put an instance in a function. For example:
 
 ```Ruby
 def hello
@@ -398,7 +398,7 @@ To use this instance variable in the template just call it by the instance name:
 
 ### 4.5 Hyperlinks
 
-Instead of using `href` to link to another page Rails uses much powerful method to link html files.
+Instead of using `href` to link to another page Rails uses a much powerful method to link a HTML files.
 
 The syntax is `<%= link_to(text, target)%>`
 
@@ -407,29 +407,29 @@ Target can be any two of the following:
 * `'demo/index'` - if the you want to link it in the same controller.
 * `{:controller => 'demo', :action => 'index'}` - if you want to link it to a different controller.
 
-This syntax generates an html `href` tag which links to the action provided. This example can be seen in [hello.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/hello.html.erb) but if you see this in [index.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/index.html.erb) when you hover on the second link you will see that there is no full url like `localhost:3000/demo/index` this is because we have added `root demo#index` in the [routs.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb) file which will reduce the link to `localhost:3000/`
+This syntax generates an HTML `href` tag which links to the action provided. This example can be seen in [hello.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/hello.html.erb). But if you see this in [index.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/index.html.erb) when you hover on the second link you will see that there is no full URL like `localhost:3000/demo/index` this is because we have added `root demo#index` in the [routs.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb) file which will reduce the link to `localhost:3000/`
 
 > Note 3: This shows that not only does `routs.rb` show how the pages are routed but it also plays an important role in how the links are created.
 
 ### 4.6 URL parameters
 
-When an URL consists of string after `?` those are called parameters. For example `localhost:3000/demo/index/1?name=akshay&age=25`, these parameters helps in sending data to the server (ROR) which can process the data. Parameters are key-value pairs.
+When a URL consists of string after `?`, Those are called parameters. For example `localhost:3000/demo/index/1?name=akshay&age=25`, These parameters help in sending data to the server (ROR) which can process the data. Parameters are key-value pairs.
 
 `:id` is put to the left side of the URL, this can be seen in [routs.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/routes.rb). Rails uses Parameter hashing method called `params` which uses `HashWithIndifferentAccess`, that means that you can have an key-value pair as `params['id']` or `params[:id]` and you can call these as `params['id']`, `params[:id]` or `@id`. See hello.html.erb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/views/demo/hello.html.erb) for the examples.
 
-In ruby we have an object called `inspect`, which will outline the output. An example of this is shown in my Ruby tutorial for [hash](https://github.com/akshaybabloo/Ruby-notes/blob/master/src/ObjectTypes_2/hashes_2_6.rb#L5); To use this in Rails you can add `<%= params.inspect %>` which can make troubleshooting easy.
+In Ruby, we have an object called `inspect`, which will outline the output. An example of this is shown in my Ruby tutorial for [hash](https://github.com/akshaybabloo/Ruby-notes/blob/master/src/ObjectTypes_2/hashes_2_6.rb#L5); To use this in Rails you can add `<%= params.inspect %>` which can make troubleshooting easy.
 
 ## 5 Database and migrations
 
-Databases are the core concepts you have to learn before creating an CMS. Here you will learn how to use and implement database and migrate them.
+Databases are the core concepts you have to learn before creating a CMS. Here you will learn how to use and implement database and migrate them.
 
 ### 5.1 Database introduction
 
-Usually Rails takes care of database structure, but some concepts of databases are important to know. I would suggest get a basic knowledge of databases which are available on the internet. Databases use `CRUD` concepts which means `C - create, R - Read, U - Update and D- Delete`. I will be discussing about them as I go along.
+Usually, Rails takes care of database structure, but some concepts of databases are important to know. I would suggest getting a basic knowledge of databases which are available on the internet. Databases use `CRUD` concepts which mean `C - create, R - Read, U - Update and D- Delete`. I will be discussing them as I go along.
 
 ### 5.2 Creating a database
 
-Rails provide ways to create databases but I suggest using command line to create a database.
+Rails provide ways to create databases, but I suggest using a command line to create a database.
 
 There are  four important keywords that you would need to know to create, use and delete a database, and they are:
 
@@ -438,11 +438,11 @@ There are  four important keywords that you would need to know to create, use an
 3. `USE database_name;` - Use the database to add tables.
 4. `DROP DATABASE database_name;` - Delete a database.
 
-Lets create a database:
+Let's create a database:
 
-* If you have created a password for your mysql login, you would have to enter `mysql -u root -p` which will ask you for your root password for mysql login.
-* You can show databases available by entering `SHOW DATABASES;`. This will list out all default installed databases.
-*  To create a data base type `CREATE DATABASE simple_cms_development;`. This will reply with `Query OK, 1 row affected (0.03 sec)` which means that a database has been created. You can conform this by typing `SHOW DATABASE;`
+* If you have created a password for your MySQL login, you would have to enter `mysql -u root -p` which will ask you for your root password for MySQL login.
+* You can show databases available by entering `SHOW DATABASES;`, this will list out all default installed databases.
+*  To create a data base type `CREATE DATABASE simple_cms_development;`, this will reply with `Query OK, 1 row affected (0.03 sec)` which means that a database has been created. You can conform this by typing `SHOW DATABASE;`
 * It is not a good idea to give Rails all the permissions of `root`, it is better to create a username for the Rails to use the database and give the permissions to use the database just created. To do that the syntax for that is
 ```sql
 GRANT ALL PRIVILEGES ON database_name.*
@@ -455,19 +455,19 @@ GRANT ALL PRIVILEGES ON simple_cms_development.*
 TO 'simple_cms'@'localhost'
 IDENTIFIED BY 'akshay12';
 ```
-Which will show you an output as `Query OK, 0 rows affected (0.05 sec)`, that means the username and permissions has been granted.
+Which will show you an output as `Query OK, 0 rows affected (0.05 sec)`, that means the username and permissions have been granted.
 * You can show all the granted databases for a user by typing `SHOW GRANT FOR 'username'@'localhost';`.
-* You can exit root mysql with `exit` command and login as `simple_cms` by typing `mysql -u simple_cms -p simple_cms_development`. This means login with the username provide and use simple_cms_development database.
+* You can exit root MySQL with `exit` command and login as `simple_cms` by typing `mysql -u simple_cms -p simple_cms_development`, this means login with the username provide and use `simple_cms_development` database.
 
 ### 5.3 Configuring Rails to use the username and database
 
-The data base file will be under `config/database.yml`, open this file. You would have to edit the `default`, which can be seen in [database.yml](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/database.yml).
+The database file will be under `config/database.yml`, Open this file. You would have to edit the `default`, which can be seen in [database.yml](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/config/database.yml).
 
-Then you can test the database by typing `rake bd:schema:dump`. This should not return any error that means the databases is accessible by Rails. This will also create a file called `schema.rb` under `db/` folder.
+Then you can test the database by typing `rake bd:schema:dump`, this should not return any error that means the databases is accessible by Rails, this will also create a file called `schema.rb` under `db/` folder.
 
 ### 5.4 What is Rake?
 
-It's a simple ruby program which helps us to run tasks. It is something similar to `make` command in unix. It uses `RakeFile` which is available in the root folder of the project. You can list out all the tasks available for Rake to use by typing `rake -T`. You can see that there are `db` tasks which will be used a lot in this chapter.
+It's a simple ruby program which helps us to run tasks. It is something similar to `make` command in UNIX. It uses `RakeFile` which is available in the root folder of the project. You can list out all the tasks available for Rake to use by typing `rake -T`. You can see that there are `db` tasks which will be used a lot in this chapter.
 
 Rake can also take in variable names. Most often used is `rake db:schema:dump RAILS_ENV=production`. By default Rails uses development environment, to change the environment you would have to use this command.
 
@@ -477,9 +477,9 @@ Migrate means to change the state of a database which means that you can create 
 
 ### 5.6 Generating migrations
 
-To generate migration type `rails generate migration DoNothingYet` in the terminal. This will create a folder called `migrate` under `db/`. There are two ways of doing migrations in Rails. One using `change` and the other is using `up` and `down`. See `db/migrate/0151110041214_do_nothing_yet.rb`.
+To generate migration type `rails generate migration DoNothingYet` in the terminal, this will create a folder called `migrate` under `db/`. There are two ways of doing migrations in Rails. One using `change` and the other is using `up` and `down`. See `db/migrate/0151110041214_do_nothing_yet.rb`.
 
-The other way to create migrations is to create a model. To do that type in `rails generate model User` on terminal, this will create few files for us. That will give you an output like this
+The other way to create migrations is to create a model. To do that type in `rails generate model User` on the terminal, this will create few files for us. That will give you an output like this
 ```Sh
 invoke  active_record
    create    db/migrate/20151110041214_do_nothing_yet.rb
@@ -497,7 +497,7 @@ Open `db/migrate/20151110042612_create_users.rb` file, in which you will find a 
 1. A long version of it is `t.column 'name', :type, options` - example: `t.column 'first_name', :string`
 2. A shortcut method is `t.type 'name', options` - example: `t.string 'last_name'`
 
-There are 10 types of column types (generally used):
+There are ten types of column types (generally used):
 
 1. binary
 2. boolean
@@ -531,7 +531,7 @@ To migrate type `rake db:migrate` in the terminal and this is its output:
 == 20151110042612 CreateUsers: migrated (0.0313s) =============================
 ```
 
-This will create two tables, you can log into mysql by doing `mysql -u simple_cms -p simple_cms_development`. you can list out table by typing `SHOW TABLES`. Then you can list out the fields associate to each table by typing `SHOW FIELDS FROM users;` or `DESC users` or `DESCRIBE users` which will print
+This will create two tables; you can log into MySQL by doing `mysql -u simple_cms -p simple_cms_development`. You can list out table by typing `SHOW TABLES`. Then you can list out the fields associate to each table by typing `SHOW FIELDS FROM users;` or `DESC users` or `DESCRIBE users` which will print
 ```
 +------------+--------------+------+-----+---------+----------------+
 | Field      | Type         | Null | Key | Default | Extra          |
@@ -546,9 +546,9 @@ This will create two tables, you can log into mysql by doing `mysql -u simple_cm
 +------------+--------------+------+-----+---------+----------------+
 ```
 
-All the migration versioning is located in `schema_migration` table which is located in the mysql.
+All the migration versioning is located in `schema_migration` table which is located in the MySQL.
 
-Migrations has also done one other thing, that is to write some entries in `/db/schema.rb`, when ever you run a schem rails dumps the schema to this file and this file also shows the current state of the database.
+Migrations have also done one other thing; that is to write some entries in `/db/schema.rb`, when ever you run a schem rails dumps the schema to this file and this file also shows the current state of the database.
 
 To migrate down type in the following `rake db:migrate VERSION=0` which will output
 ```
@@ -626,7 +626,7 @@ A problem I faced when doing `rake db:migrate VERSION=0` is that I would get an 
 2. `rake db:create` - which creates all the tables
 3. `rake db:migrate` - which migrates the tables
 
-`rake db:drop` and `rake db:create` gave me an `access denied` error. That means the problem is with MySQL not with Rails. So I had to give permission to `simple_cms` user. To do that open your MySQL root user in terminal by typing `mysql -u root -p` and enter the password. Now type `GRANT ALL PRIVILEGES ON * . * TO 'simple_cms'@'localhost';` this means that you are providing all the privileges to this user. Once this is done go back to the terminal and type these three commands:
+`rake db:drop` and `rake db:create` gave me an `access denied` error. That means the problem is with MySQL not with Rails. So I had to give permission to `simple_cms` user. To do that open your MySQL root user in the terminal by typing `mysql -u root -p` and enter the password. Now type `GRANT ALL PRIVILEGES ON * . * TO 'simple_cms'@'localhost';` this means that you are providing all the privileges to this user. Once this is done go back to the terminal and type these three commands:
 
 1. `rake db:drop` - which drops all the tables **This will delete all the data in the database**
 2. `rake db:create` - which creates all the tables
@@ -636,7 +636,7 @@ This should create all the tables and migrate the data for you. At this point yo
 
 ### 5.10 Migrations for CMS
 
-Lets create model for our CMS.
+Let's create a model for our CMS.
 
 We would have to create three models; `Subject`, `Pages` and `Section`. These can be created by the following command:
 ```sh
@@ -650,17 +650,17 @@ Once done lets edit migration files. See
 20151111010814_create_pages.rb
 20151111010820_create_sections.rb
 ```
-Once the files are edited with its column names type `rake db:migrate` in terminal.
+Once the files are edited with its column names type `rake db:migrate` in the terminal.
 
 ## 6. Models, ActiveRecord and ActiveRelation
 
-In this chapter we will learn the working principal of Models, ActiveRecord and ActiveRelation
+In this chapter we will learn the working principal of Models, ActiveRecord, and ActiveRelation
 
 ### 6.1 ActiveRecord and ActiveRelation
 
 #### 6.1.1 ActiveRecord
 
-When written in all lower case with space `active record` - it is a design pattern for relational databases, which is not a part of Rails and can be implemented in any object oriented programming. but when written as `ActiveRecord` - it is a rails implementation of design pattern. It helps us to retrieve and manipulate data as objects, not as static rows.
+When written in all lower case with space `active record` - it is a design pattern for relational databases, which is not a part of Rails and can be implemented in any object-oriented programming. But when written as `ActiveRecord` - it is a Rails implementation of a design pattern. It helps us to retrieve and manipulate data as objects, not as static rows.
 
 These objects are pretty intelligent, which means that they understand the structure of the table, contains the data retrieved from the row, it know how to CRUD and can be manipulated as objects and then they can be saved.
 
@@ -680,7 +680,7 @@ user.delete # this will execute sql delete command
 
 #### 6.1.2 ActiveRelation
 
-It was added in Rails v3 on wards which is also known as `ARel`. It is an object oriented implementation of relational algebra. ActiveRelation does some complex sql queries behind the scene.
+It was added in Rails v3 on wards which is also known as `ARel`. It is an object-oriented implementation of relational algebra. ActiveRelation does some complex SQL queries behind the scene.
 
 For example:
 ```Ruby
@@ -697,7 +697,7 @@ ordered by last_nem ASC LIMIT 5
 
 ### 6.2 Generating a Model
 
-When ever you enter the command `rail generate model Subject`, rails create the following files
+Whenever you enter the command `rail generate model Subject`, rails create the following files
 
 ```
 db/migrate (everything in migrate is pural):
@@ -708,7 +708,7 @@ db/migrate (everything in migrate is pural):
         def change
         end
 
-app/modles (everything in model is singular):
+app/modles (everything in a model is singular):
 
 subject.rb
     With class name `Subject` that inherits `ActiveRecord::Base`
@@ -724,7 +724,7 @@ Remember we changed the table name `users` to `admin_users`, this can be seen in
 
 Type `rails console` or `rails c` in your terminal. By default rails console loads as development environment, you can load into different environment by typing `rails console production`
 
-Rails console is nothing but an `irb` with Rails application included in it. You can check the contents of every model from Rails console. for example open rails console and type in `subject = Subject.new` this will list out which will output your Subject class `#<Subject id: nil, name: nil, position: nil, visible: false, created_at: nil, updated_at: nil>`
+Rails console is nothing but an `irb` with Rails application included in it. You can check the contents of every model from Rails console. For example, open rails console and type in `subject = Subject.new` this will list out which will output your Subject class `#<Subject id: nil, name: nil, position: nil, visible: false, created_at: nil, updated_at: nil>`
 
 ### 6.4 Creating records
 
@@ -863,9 +863,9 @@ The following are the types of finding the records
 * All - syntax is `Subject.all` - returns an array of objects
 * First/last methods - syntax is `Subject.first` and `Subject.last` - this returns an object or nil.
 
-All codes given above goes to the mysql as soon as the code is executed where as `ActiveRelation` does not.
+All codes given above goes to the MySQL as soon as the code is executed where as `ActiveRelation` does not.
 
-Lets create a record by typing `subject = Subject.create(:name => 'your name', :position => 3)` then to test out the difference you can try to find a deleted record by typing `subject = Subject.find(3)` this will give you a full stack error that will in production will show you `404` or `500` error, you can change the finding by doing `subject =Subject.find_by_id(3)` which will generate the exact sql query but it will return `nil`.
+Lets create a record by typing `subject = Subject.create(:name => 'your name', :position => 3)`. Then to test out the difference, you can try to find a deleted record by typing `subject = Subject.find(3)`, this will give you a full stack error that will in production show you `404` or `500` error. You can change the finding by doing `subject =Subject.find_by_id(3)` which will generate the exact SQL query but it will return `nil`.
 
 ### 6.8 Conditional: Where
 
@@ -876,7 +876,7 @@ For example
 ```Ruby
 Subject.where(:visible => true)
 ```
-This will be looking out for all subjects who's visibility is true. This will return ActiveRelation method which can be daisy chained with others.
+This will be looking out for all subjects who's visibility is true. This will return ActiveRelation method which can be daisy-chained with others.
 
 For example
 
@@ -935,10 +935,10 @@ Subject Load (18.0ms)  SELECT `subjects`.* FROM `subjects` WHERE `subjects`.`vis
 => #<ActiveRecord::Relation [#<Subject id: 1, name: "update subject", position: 1, visible: true, created_at: "2015-11-11 04:22:10", updated_at: "2015-11-11 05:25:51">]>
 ```
 
-### 6.9 Conditional: Order, Limit and Offset
+### 6.9 Conditional: Order, Limit, and Offset
 
 Order - You can sort the queries by doing `order(sql)`
-Limit - You can limit an query by a number `limit(number)`
+Limit - You can limit a query by a number `limit(number)`
 Offset - This will enable you to skip over the records by a number `offset(number)`
 
 For example
@@ -946,7 +946,7 @@ For example
 Subject.order('position ASC').limit(10).offset(30)
 ```
 
-Usually you would not give the table name when you use order. The problem would start when you start joining two tables, like joining a two columns of different tables.
+Usually, you would not give the table name when you use order. The problem would start when you start joining two tables, like joining a two columns of different tables.
 
 Open your rails console and do the following:
 
@@ -1000,7 +1000,7 @@ Using `stabby lambda syntax`
 scope :name_of_the_scope, -> {where(:active => true)}  
 ```
 
-There are differences between using `lambda` and `stabby lambda`, but we will stick to `lambda`
+There are differences between using `lambda` and `stabby lambda`, but we will stick to `lambda`.
 
 A lambda `lambda {where(:active => true)}` can be `def` as
 ```Ruby
@@ -1030,17 +1030,17 @@ There are different types of table associations, such as
 
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-1.png" width="300">
 
-A One-to-one association means, every class table has one teacher table teaching. Here teacher is the foreign key. In rails you can write it as
+A One-to-one association means, every class table has one teacher table teaching. Here the teacher is the foreign key. In rails, you can write it as
 ```Ruby
 Classroom has_one :teacher
 Teacher belongs_to :classroom
 ```
-A one-to-one relationships can be used in two scenario:
+One-to-one relationships can be used in two scenarios:
 
 1. A person or a thing is unique. - Example `Student has_one :id`
-2. Breaking a singling table into multiple. - Example `Customer has_one :address` - This can be done to make sure that there are no cluttering and also sometimes a `Customer` table is used more and the `Address` is not used that much.
+2. Breaking a singling table into multiple. - Example `Customer has_one :address` - This can be done to make sure that there are no cluttering and also sometimes a `Customer` table is used more, and the `Address` is not used that much.
 
-It is not common to use one-to-one relationships. In the final project we will be using one-to-many relationship, the code written here will not be used.
+It is not common to use one-to-one relationships. In the final project, we will be using one-to-many relationship, the code written here will not be used.
 
 **Subject - Page relationship**
 
@@ -1052,7 +1052,7 @@ Page belongs_to :subject
 
 see [subject.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/models/subject.rb) and [page.rb](https://github.com/akshaybabloo/Ruby-on-rails-4-notes/blob/master/simple_cms/app/models/page.rb)
 
-Now lets try in in `rails console`.
+Now let's try in `rails console`.
 
 Type in
 ```Ruby
@@ -1073,9 +1073,9 @@ which will return
 Page Load (1.5ms)  SELECT  `pages`.* FROM `pages` WHERE `pages`.`subject_id` = 1 LIMIT 1
 => nil
 ```
-You will not get an error, but look at the sql it has generated.
+You will not get an error but look at the SQL it has generated.
 
-Now lets add some data to `pages` table by typing
+Now let's add some data to `pages` table by typing
 
 ```Ruby
 first_page = Page.new(:name => 'first_name', :permalink => 'first', :position => 1)
@@ -1106,7 +1106,7 @@ which will return
 => #<Page id: 1, subject_id: 1, name: "first_name", permalink: 0, position: 1, visible: false, created_at: "2015-11-21 23:41:30", updated_at: "2015-11-21 23:41:30">
 ```
 
-Even though the page content is removed when you enter `subject.page` is entered the data entered in to it is rreturned This is because rails keeps the data temporarly. So to get rid of this completely type in
+Even though the page content is removed when you enter `subject.page` is entered the data entered into it is returned, this is because rails keep the data temporarily. So to get rid of this completely type in
 ```Ruby
 subject.page(true)
 ```
@@ -1115,7 +1115,7 @@ This acts like a reload page.
 
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/1-2-many.png" width="300">
 
-A One-to-many association means, ever teacher table has many subjects table associated to them. In rails you can write it as
+A One-to-many association means, ever teacher table has many subjects table associated with them. In rails, you can write it as
 ```Ruby
 Teacher has_many :courses # one-to-many
 Course belongs_to :teacher # many-to-one
@@ -1125,9 +1125,9 @@ Course belongs_to :teacher # many-to-one
 
 <img src="https://raw.githubusercontent.com/akshaybabloo/Ruby-on-rails-4-notes/master/images/many-2-many.jpg" width="300">
 
-A course has many students and vice versa. So there are two foreign key, they go in a third table called join table. This means a student can have more than one subject, that subject is called by its FK which is stored in an another table. In rails you can write it as
+A course has many students and vice versa. So there are two foreign key, they go in a third table called join table, this means a student can have more than one subject, that subject is called by its FK which is stored in an another table. In rails, you can write it as
 ```Ruby
 Course has_and_belongs_to_many :students
 Student has_and_belongs_to_many :courses
 ```
-Also know as HABTM method.
+Also, know as HABTM method.
