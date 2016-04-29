@@ -2,6 +2,79 @@
 
 > Note 1: Always type these commands in the Rails folder after you create a project.
 
+**Table of Content**
+
+<!-- MDTOC maxdepth:6 firsth1:2 numbering:0 flatten:0 bullets:1 updateOnSave:1 -->
+
+- [1. Requirements](#1-requirements)   
+   - [1.1 Mac](#11-mac)   
+- [2 Instillation](#2-instillation)   
+   - [2.1 Mac](#21-mac)   
+      - [2.1.1 Step 1: Editing .bash_profile](#211-step-1-editing-bash-profile)   
+      - [2.1.2 Step 2: Install XCode and command line tools](#212-step-2-install-xcode-and-command-line-tools)   
+      - [2.1.3 Step 3: Installing Homebrew](#213-step-3-installing-homebrew)   
+      - [2.1.4 Step 4: Installing Ruby virtual environment (rbenv)](#214-step-4-installing-ruby-virtual-environment-rbenv)   
+      - [2.1.5 Step 5: Installing Ruby](#215-step-5-installing-ruby)   
+      - [2.1.6 Step 6: RubyGems](#216-step-6-rubygems)   
+      - [2.1.7 Step 7: Installing Ruby on Rails](#217-step-7-installing-ruby-on-rails)   
+      - [2.1.8 Step 8: Installing MySQL and mysql2 gem](#218-step-8-installing-mysql-and-mysql2-gem)   
+         - [2.1.8.1 Step 8.1: MySQL](#2181-step-81-mysql)   
+         - [2.1.8.2 Step 8.2: mysql2 gem](#2182-step-82-mysql2-gem)   
+- [3 Creating and running an application](#3-creating-and-running-an-application)   
+   - [3.1 Creating new application](#31-creating-new-application)   
+   - [3.2 Introduction to bundler](#32-introduction-to-bundler)   
+   - [3.3 Accessing a project](#33-accessing-a-project)   
+      - [3.3.1 Running the server](#331-running-the-server)   
+   - [3.4 Generating views and controller](#34-generating-views-and-controller)   
+   - [3.5 File structure](#35-file-structure)   
+   - [3.6 Handling server requests](#36-handling-server-requests)   
+   - [3.7 Routing](#37-routing)   
+      - [3.7.1 Simple rout (Match rout)](#371-simple-rout-match-rout)   
+      - [3.7.2 Default route](#372-default-route)   
+      - [3.7.3 Root rout](#373-root-rout)   
+- [4 Controller, views, and dynamic content](#4-controller-views-and-dynamic-content)   
+   - [4.1 Template rendering](#41-template-rendering)   
+   - [4.2 Redirect action](#42-redirect-action)   
+   - [4.3 View template](#43-view-template)   
+   - [4.4 Instance variable](#44-instance-variable)   
+   - [4.5 Hyperlinks](#45-hyperlinks)   
+   - [4.6 URL parameters](#46-url-parameters)   
+- [5 Database and migrations](#5-database-and-migrations)   
+   - [5.1 Database introduction](#51-database-introduction)   
+   - [5.2 Creating a database](#52-creating-a-database)   
+   - [5.3 Configuring Rails to use the username and database](#53-configuring-rails-to-use-the-username-and-database)   
+   - [5.4 What is Rake?](#54-what-is-rake)   
+   - [5.5 Rails migration](#55-rails-migration)   
+   - [5.6 Generating migrations](#56-generating-migrations)   
+   - [5.8 Migration methods](#58-migration-methods)   
+   - [5.9 Solving migration problems](#59-solving-migration-problems)   
+   - [5.10 Migrations for CMS](#510-migrations-for-cms)   
+- [6. Models, ActiveRecord and ActiveRelation](#6-models-activerecord-and-activerelation)   
+   - [6.1 ActiveRecord and ActiveRelation](#61-activerecord-and-activerelation)   
+      - [6.1.1 ActiveRecord](#611-activerecord)   
+      - [6.1.2 ActiveRelation](#612-activerelation)   
+   - [6.2 Generating a Model](#62-generating-a-model)   
+   - [6.3 Rails console](#63-rails-console)   
+   - [6.4 Creating records](#64-creating-records)   
+   - [6.5 Updating records](#65-updating-records)   
+   - [6.6 Deleting records](#66-deleting-records)   
+   - [6.7 Finding records](#67-finding-records)   
+   - [6.8 Conditional: Where](#68-conditional-where)   
+   - [6.9 Conditional: Order, Limit, and Offset](#69-conditional-order-limit-and-offset)   
+   - [6.10 Named Scopes](#610-named-scopes)   
+- [7 Table associations](#7-table-associations)   
+   - [7.1 One-to-one associations](#71-one-to-one-associations)   
+   - [7.2 One-to-many associations](#72-one-to-many-associations)   
+   - [7.3 Many-to-many associations](#73-many-to-many-associations)   
+
+<!-- /MDTOC -->
+
+**License**
+
+The code is provided under [MIT License](https://github.com/akshaybabloo/JavaScript-Tutorial/blob/master/LICENSE) and the tutorial is provided under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+![CC](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)
+
 ## 1. Requirements
 
 ### 1.1 Mac
